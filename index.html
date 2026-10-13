@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Alestore Contability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Colori dinamici voci (sovrascritti da JS) */
+  --single:#3451D1; --recurring:#1B8F80; --rate:#E8582A;
+  
+  /* Colore identità App (invariabile) */
+  --accent:#3451D1;
+  --on-accent:#FFFFFF;
+  --danger:#B3261E;
+  
+  /* Palette Base Light */
+  --bg-gradient: radial-gradient(at 0% 0%, rgba(142, 197, 252, 0.4) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(224, 195, 252, 0.4) 0px, transparent 50%), #F2F4F8;
+  --surface-glass: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-shadow: rgba(0, 0, 0, 0.05);
+  --ink:#101B33; --muted:#59647E; --line:rgba(220, 225, 235, 0.6); --tint:rgba(234, 238, 246, 0.6);
+  
+  --f-display:'Bricolage Grotesque','Avenir Next','Segoe UI',system-ui,sans-serif;
+  --f-body:'Figtree','Segoe UI',system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    /* Colore identità App Dark */
+    --accent:#5C7CFF;
+    --danger:#FF8A80;
+    
+    /* Palette Liquid Glass Dark */
+    --bg-gradient: radial-gradient(at 0% 0%, rgba(52, 81, 209, 0.25) 0px, transparent 55%), radial-gradient(at 100% 100%, rgba(27, 143, 128, 0.2) 0px, transparent 55%), #0B101E;
+    --surface-glass: rgba(22, 30, 51, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: rgba(0, 0, 0, 0.2);
+    --ink:#EAEEF8; --muted:#98A3BD; --line:rgba(255, 255, 255, 0.1); --tint:rgba(0, 0, 0, 0.2);
+  }
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+
+/* FIX PER ELEMENTI NASCOSTI */
+[hidden] { display: none !important; }
+
+/* NATIVE APP FEELING */
+body {
+  margin:0;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.5;
+  min-height: 100vh;
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  -webkit-font-smoothing:antialiased;
+}
+input, select, textarea { -webkit-user-select: auto; user-select: auto; }
+::-webkit-scrollbar { width: 0px; background: transparent; }
+button,input,select{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.app{max-width:1040px;margin:0 auto;padding:20px 20px 100px}
+
+/* GLASSMORPHISM UTILS */
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 40px var(--glass-shadow);
+}
+
+/* HEADER & PROFILE */
+.main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.brand{display:flex;align-items:center;gap:12px;}
+.brand svg{width:36px;height:36px;flex:none;display:block}
+.brand span{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:-0.015em; display: none;}
+@media (min-width: 400px) { .brand span { display: block; } }
+
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 16px; cursor: pointer;
+  color: var(--ink); padding: 0;
+  transition: transform 0.2s, background 0.2s;
+}
+.avatar:active { transform: scale(0.92); }
+
+/* CONTROLS HEADER */
+.top{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap; margin-bottom: 16px;}
+.month{display:flex;align-items:center;gap:10px}
+.month h1{font-family:var(--f-display);font-size:20px;font-weight:700;margin:0;min-width:13ch;text-align:center}
+.round{width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center; transition: transform 0.2s}
+.round:active{transform:scale(0.92)}
+.btn{border:0;border-radius:999px;padding:10px 20px;font-weight:600;cursor:pointer;background:var(--accent);color:var(--on-accent); transition: transform 0.2s, filter 0.2s;}
+.btn:active{transform:scale(0.95)}
+.btn.quiet{background:transparent;color:var(--ink);border:1px solid var(--line)}
+
+/* FAB (Floating Action Button) */
+.fab {
+  position: fixed; bottom: max(32px, env(safe-area-inset-bottom, 32px)); right: 24px;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent);
+  border: none; font-size: 32px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  cursor: pointer; z-index: 100;
+  transition: transform 0.2s;
+}
+.fab:active { transform: scale(0.9); }
+.fab svg { width: 32px; height: 32px; fill: currentColor; }
+
+/* HERO */
+.hero{padding:10px 0 32px; text-align: center;}
+.greeting{font-size: 18px; font-weight: 600; color: var(--muted); margin-bottom: 4px;}
+.hero-label{color:var(--muted);font-weight:500; margin-top: 4px;}
+.hero-total{font-family:var(--f-display);font-weight:700;font-size:clamp(46px,12vw,88px);line-height:1.02;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;margin:4px 0 22px}
+.bar{display:flex;gap:4px;height:16px;border-radius:8px;overflow:hidden;background:var(--tint); max-width: 400px; margin: 0 auto;}
+.bar span{display:block;height:100%;transition:width .35s ease; border-radius:8px;}
+.bar .s{background:var(--single)} .bar .r{background:var(--recurring)} .bar .i{background:var(--rate)}
+.legend{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px}
+.legend li{display:flex;align-items:center;gap:8px; font-size: 15px;}
+.legend .dot{width:10px;height:10px;border-radius:50%}
+.legend b{font-variant-numeric:tabular-nums;font-weight:600}
+.status{margin:24px auto 0;color:var(--muted); font-size: 14px; max-width: 360px;}
+.status b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* LAYOUT */
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.ledger,.side{border-radius:24px;padding:24px}
+.side section+section{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+h2{font-family:var(--f-display);font-size:22px;font-weight:700;margin:0 0 16px}
+
+/* LEDGER & PROVIDER ICONS */
+.group+.group{margin-top:28px}
+.group h3{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:16px;font-weight:600}
+.group h3 .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.group h3 .sub{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:500}
+.t-single{--c:var(--single)} .t-recurring{--c:var(--recurring)} .t-installment{--c:var(--rate)}
+.rows{list-style:none;margin:0;padding:0; display:grid; gap: 12px;}
+.row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:0 14px;padding:12px;background: var(--tint); border-radius: 16px; align-items: center;}
+.day{width:40px;height:40px;border-radius:50%;background:var(--bg);color:var(--c);display:grid;place-items:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums; border: 1px solid var(--line);}
+.what{min-width:0}
+.what strong{display:block;font-weight:600;overflow-wrap:anywhere; font-size: 15px;}
+.meta{color:var(--muted);font-size:13px; display:flex; align-items:center; flex-wrap:wrap; margin-top:2px;}
+.prov-icon{display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:4px; font-size:11px; font-weight:800; margin-right:4px;}
+.amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap; font-size: 16px;}
+.acts{grid-column:2 / -1;display:flex;gap:6px;margin-top:4px}
+.link{background:none;border:0;padding:4px 8px 4px 0;color:var(--muted);font-size:13px;cursor:pointer; font-weight:600;}
+.link:hover{color:var(--ink);}
+.link.danger{color:var(--danger);}
+.empty{color:var(--muted);margin:6px 0 10px}
+
+/* PLANS & CATEGORIES */
+.plan+.plan,.cat+.cat{margin-top:16px}
+.plan-head,.cat-head{display:flex;justify-content:space-between;gap:12px; font-size: 15px;}
+.plan-head strong{font-weight:600; display:flex; align-items:center;}
+.plan-head .amt{font-weight:600;color:var(--muted)}
+.cat-head{font-weight: 500;}
+.cat-head .amt{font-weight:600;}
+.track{height:6px;border-radius:3px;background:var(--line);margin:8px 0 6px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--rate);border-radius:3px;transition:width .35s ease}
+.track i.c{background:var(--single)}
+.remaining{margin:20px 0 0;padding:14px;border-radius:16px;background:var(--tint)}
+.remaining b{font-variant-numeric:tabular-nums; font-size: 16px;}
+
+/* BACKUP SECTION */
+.bk-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.bk-msg{margin:12px 0 0;min-height:1.4em;color:var(--muted);font-size:14px}
+.choice{margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--tint)}
+.choice[hidden]{display:none}
+details.paste{margin-top:12px}
+details.paste summary{cursor:pointer;color:var(--muted);font-size:14px}
+textarea{width:100%;min-height:96px;border:1px solid var(--line);background:var(--tint);border-radius:12px;padding:10px 12px;font:13px/1.4 ui-monospace,monospace;color:var(--ink);margin-top:8px}
+
+/* PROJECTION */
+.proj{width:100%;height:auto;display:block}
+.proj .b-rec{fill:var(--recurring); transition: fill 0.3s;} .proj .b-rate{fill:var(--rate); transition: fill 0.3s;}
+.proj text{fill:var(--muted);font-size:11px;font-family:var(--f-body);text-anchor:middle;font-variant-numeric:tabular-nums}
+.proj text.v{fill:var(--ink);font-weight:600}
+.proj-legend{display:flex;justify-content:center;gap:18px;margin-top:6px;font-size:14px;color:var(--muted)}
+.proj-legend span{display:flex;align-items:center;gap:6px}
+.proj-legend .dot{width:10px;height:10px;border-radius:50%}
+
+/* DIALOG MODALS */
+dialog{border:0;border-radius:28px;padding:0;width:calc(100% - 32px);max-width:460px;color:var(--ink); margin: auto;}
+dialog::backdrop{background:rgba(0,0,0,.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);}
+.form{padding:26px;display:grid;gap:18px}
+.form h2{margin:0; font-size: 22px;}
+.seg{border:0;margin:0;padding:4px;display:grid;grid-template-columns:repeat(3,1fr);background:var(--line);border-radius:14px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:block;text-align:center;padding:10px 4px;border-radius:10px;font-weight:600;font-size:13px;color:var(--muted); transition: all 0.2s;}
+.seg input:checked+span{background:var(--surface-glass);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.field{display:grid;gap:6px}
+.field[hidden]{display:none}
+.field label{font-size:14px;font-weight:600; color: var(--muted);}
+.field input,.field select{width:100%;border:1px solid var(--line);background:var(--tint);border-radius:12px;padding:12px 14px;min-height:48px; font-weight: 500;}
+.field input[type="color"]{padding: 2px; min-height: 44px; cursor: pointer;}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent; background: var(--bg);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.err{color:var(--danger);font-weight:500;margin:0;min-height:1.4em; font-size: 14px;}
+.actions{display:flex;justify-content:flex-end;gap:12px; margin-top: 8px;}
+.actions .btn{padding: 12px 24px; font-size: 16px;}
+
+/* SETTINGS CATEGORY LIST */
+.cat-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+.cat-list li { display:flex; justify-content:space-between; background:var(--bg); border: 1px solid var(--line); padding:10px 14px; border-radius:12px; align-items:center; font-size: 15px; font-weight:600; }
+
+/* ONBOARDING MODAL */
+#dlgWelcome.fullscreen {
+  width: 100dvw; height: 100dvh; max-width: none; max-height: none;
+  margin: 0; padding: 0; border-radius: 0; border: none;
+  background: var(--bg-gradient);
+  z-index: 9999;
+}
+/* Assicura che il flexbox si attivi solo quando il dialog è aperto */
+dialog[open]#dlgWelcome.fullscreen {
+  display: flex; align-items: center; justify-content: center;
+}
+#dlgWelcome::backdrop {
+  background: var(--bg-gradient);
+}
+.welcome-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 24px; max-width: 400px; width: 100%; box-sizing: border-box;
+}
+.welcome-logo { width:72px; height:72px; margin-bottom:20px; }
+.welcome-features { list-style:none; padding:0; margin:24px 0 32px; text-align:left; display:grid; gap:16px; font-size:16px; width: 100%; }
+.welcome-features li { display:flex; align-items:center; gap:12px; }
+.welcome-icon { font-size:24px; background:var(--tint); width:48px; height:48px; display:grid; place-items:center; border-radius:14px; flex-shrink: 0;}
+.welcome-input { text-align:center; font-size:20px; padding:16px; border-radius:16px; margin: 10px 0 32px; font-weight:700; width:100%; box-sizing: border-box; }
+
+@media (max-width:820px){ .grid{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:480px){ .app{padding:16px 16px 100px} .ledger,.side{padding:20px} }
+@media (prefers-reduced-motion:reduce){ .bar span,.track i, .btn, .fab, .round, .avatar{transition:none} }
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING (Visibile solo al primo avvio) -->
+<dialog id="dlgWelcome" class="fullscreen glass" aria-labelledby="welcomeTitle">
+  <div class="welcome-card" id="slide1">
+    <svg viewBox="0 0 40 40" class="welcome-logo" aria-hidden="true">
+      <rect width="40" height="40" rx="11" fill="var(--accent)"/>
+      <path d="M11 25 L20 9 L29 25" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="10" y="29" width="8" height="4" rx="2" fill="#FFFFFF"/>
+      <rect x="19" y="29" width="5.5" height="4" rx="2" fill="var(--recurring)"/>
+      <rect x="25.5" y="29" width="4.5" height="4" rx="2" fill="var(--rate)"/>
+    </svg>
+    <h2 id="welcomeTitle">Benvenuto in Alestore Contability</h2>
+    <p style="color:var(--muted); margin-top:8px;">La tua nuova cassaforte finanziaria, bella e veloce.</p>
+    
+    <ul class="welcome-features">
+       <li><div class="welcome-icon">💳</div><div><b>Spese Singole</b><br><span style="color:var(--muted);font-size:14px">Acquisti di tutti i giorni.</span></div></li>
+       <li><div class="welcome-icon">🔄</div><div><b>Ricorrenti</b><br><span style="color:var(--muted);font-size:14px">Abbonamenti e bollette mensili.</span></div></li>
+       <li><div class="welcome-icon">📊</div><div><b>Rate in corso</b><br><span style="color:var(--muted);font-size:14px">Tieni sotto controllo i finanziamenti.</span></div></li>
+    </ul>
+    
+    <button type="button" class="btn" id="btnWelcomeNext" style="width:100%; padding:14px; font-size:16px;">Continua</button>
+    <button type="button" class="btn quiet" id="btnWelcomeSignIn" hidden style="width:100%; padding:14px; font-size:16px; margin-top:12px;">Ho già un account: accedi con Google</button>
+  </div>
+
+  <div class="welcome-card" id="slide2" hidden>
+    <h2>Come ti chiami?</h2>
+    <p style="color:var(--muted); margin-top:8px;">Personalizza la tua esperienza per sentirti a casa.</p>
+    <input type="text" id="welcomeName" placeholder="Il tuo nome" class="welcome-input" autocomplete="off">
+    <button type="button" class="btn" id="btnWelcomeStart" style="width:100%; padding:14px; font-size:16px;">Inizia ora</button>
+  </div>
+</dialog>
+
+<div class="app">
+  <header class="main-header">
+    <div class="brand">
+      <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <rect width="40" height="40" rx="11" fill="var(--accent)"/>
+        <path d="M11 25 L20 9 L29 25" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="10" y="29" width="8" height="4" rx="2" fill="#FFFFFF"/>
+        <rect x="19" y="29" width="5.5" height="4" rx="2" fill="var(--recurring)"/>
+        <rect x="25.5" y="29" width="4.5" height="4" rx="2" fill="var(--rate)"/>
+      </svg>
+      <span>Alestore Contability</span>
+    </div>
+    <button class="avatar glass" id="btnSettings" aria-label="Impostazioni Profilo">
+      <span id="avatarInitials">U</span>
+    </button>
+  </header>
+
+  <header class="top">
+    <nav class="month" aria-label="Scegli il mese">
+      <button class="round glass" id="prev" aria-label="Mese precedente">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <h1 id="monthLabel" aria-live="polite"></h1>
+      <button class="round glass" id="next" aria-label="Mese successivo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </nav>
+    <button class="btn quiet glass" id="today" type="button" style="padding: 10px 16px;">Oggi</button>
+  </header>
+
+  <section class="hero" aria-label="Riepilogo del mese">
+    <div class="greeting" id="greeting">Ciao!</div>
+    <div class="hero-label" id="heroLabel"></div>
+    <div class="hero-total" id="total"></div>
+    <div class="bar" id="bar" role="img" aria-label="Ripartizione delle uscite del mese"></div>
+    <ul class="legend" id="legend"></ul>
+    <p class="status" id="status"></p>
+  </section>
+
+  <div class="grid">
+    <section class="ledger glass" aria-labelledby="ledgerTitle">
+      <h2 id="ledgerTitle">Movimenti del mese</h2>
+      <div id="list"></div>
+    </section>
+
+    <aside class="side glass">
+      <section aria-labelledby="catsTitle">
+        <h2 id="catsTitle">Per categoria</h2>
+        <div id="cats"></div>
+      </section>
+      <section aria-labelledby="plansTitle">
+        <h2 id="plansTitle">Rate in corso</h2>
+        <div id="plans"></div>
+        <p class="remaining" id="remaining"></p>
+      </section>
+      <section aria-labelledby="projTitle">
+        <h2 id="projTitle">Impegni dei prossimi 6 mesi</h2>
+        <svg class="proj" id="proj" viewBox="0 0 360 190" role="img"></svg>
+        <div class="proj-legend">
+          <span><i class="dot" style="background:var(--rate)"></i>Rate</span>
+          <span><i class="dot" style="background:var(--recurring)"></i>Ricorrenti</span>
+        </div>
+      </section>
+      <section aria-labelledby="cloudTitle">
+        <h2 id="cloudTitle">Sincronizzazione</h2>
+        <p class="meta" style="margin:0" id="cloudStatus">Accedi con Google per avere i dati su tutti i tuoi dispositivi.</p>
+        <div class="bk-actions">
+          <button class="btn" type="button" id="btnSignIn">Accedi con Google</button>
+          <button class="btn quiet" type="button" id="btnSignOut" hidden>Esci</button>
+        </div>
+        <p class="bk-msg" id="cloudMsg" role="status"></p>
+      </section>
+      <section aria-labelledby="bkTitle">
+        <h2 id="bkTitle">Gestione Dati</h2>
+        <p class="meta" style="margin:0">Salva e sincronizza i tuoi dati.</p>
+        <div class="bk-actions">
+          <button class="btn" type="button" id="bkSave">Esporta Dati</button>
+          <button class="btn quiet" type="button" id="bkImport">Importa</button>
+        </div>
+        <input type="file" id="bkFile" accept=".json,application/json" hidden>
+        <div class="choice" id="choice" hidden>
+          <div id="choiceText"></div>
+          <div class="bk-actions">
+            <button class="btn" type="button" id="bkMerge">Unisci</button>
+            <button class="btn quiet" type="button" id="bkReplace">Sostituisci</button>
+            <button class="btn quiet" type="button" id="bkCancel">Annulla</button>
+          </div>
+        </div>
+        <p class="bk-msg" id="bkMsg" role="status"></p>
+      </section>
+    </aside>
+  </div>
+  
+  <button class="fab" id="add" type="button" aria-label="Aggiungi voce">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<!-- DIALOG INSERIMENTO VOCE -->
+<dialog id="dlg" class="glass" aria-labelledby="dlgTitle">
+  <form class="form" id="f" novalidate>
+    <h2 id="dlgTitle">Nuova voce</h2>
+
+    <fieldset class="seg">
+      <legend class="sr">Tipo di voce</legend>
+      <label><input type="radio" name="type" value="single" checked><span>Singola</span></label>
+      <label><input type="radio" name="type" value="recurring"><span>Ricorrente</span></label>
+      <label><input type="radio" name="type" value="installment"><span>Rata</span></label>
+    </fieldset>
+
+    <div class="field">
+      <label for="fName" id="lName">Descrizione</label>
+      <input id="fName" type="text" autocomplete="off" maxlength="80">
+    </div>
+
+    <div class="field" id="gProvider" hidden>
+      <label for="fProvider">Servizio</label>
+      <input id="fProvider" type="text" list="providers" autocomplete="off" maxlength="40" placeholder="Klarna, PayPal…">
+      <datalist id="providers">
+        <option value="Klarna"><option value="Cofidis"><option value="Scalapay"><option value="PayPal"><option value="Findomestic"><option value="Compass">
+      </datalist>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label for="fAmount" id="lAmount">Importo (€)</label>
+        <input id="fAmount" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0,00">
+      </div>
+      <div class="field" id="gCount" hidden>
+        <label for="fCount">N. rate</label>
+        <input id="fCount" type="number" inputmode="numeric" step="1" min="1" max="120" value="3">
+      </div>
+      <div class="field" id="gDate">
+        <label for="fDate">Data</label>
+        <input id="fDate" type="date">
+      </div>
+    </div>
+
+    <div class="two" id="gStartRow" hidden>
+      <div class="field">
+        <label for="fStart" id="lStart">Inizio</label>
+        <input id="fStart" type="month" placeholder="2026-10" pattern="\d{4}-\d{2}">
+      </div>
+      <div class="field">
+        <label for="fDay">Giorno addebito</label>
+        <input id="fDay" type="number" inputmode="numeric" min="1" max="31" step="1" value="1">
+      </div>
+    </div>
+
+    <div class="field" id="gEnd" hidden>
+      <label for="fEnd">Fino al (facoltativo)</label>
+      <input id="fEnd" type="month" placeholder="2027-06" pattern="\d{4}-\d{2}">
+    </div>
+
+    <div class="field" id="gCat">
+      <label for="fCat">Categoria</label>
+      <select id="fCat"></select>
+    </div>
+
+    <p class="err" id="err" role="alert"></p>
+    <div class="actions">
+      <button class="btn quiet" type="button" id="cancel">Annulla</button>
+      <button class="btn" type="submit" id="saveBtn">Salva</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- DIALOG IMPOSTAZIONI -->
+<dialog id="dlgSet" class="glass" aria-labelledby="dlgSetTitle">
+  <form class="form" id="fSet" novalidate>
+    <h2 id="dlgSetTitle">Impostazioni</h2>
+    
+    <div class="field">
+      <label for="setName">Il tuo Nome</label>
+      <input id="setName" type="text" placeholder="Es. Alessandro" maxlength="30">
+    </div>
+
+    <div class="field" style="margin-top: 8px;">
+      <label>Le tue Categorie</label>
+      <ul id="setCatList" class="cat-list"></ul>
+      <button class="btn quiet" type="button" id="btnAddCat" style="padding: 10px; font-size: 14px; margin-top: 8px; width:100%; border-style:dashed;">+ Aggiungi Categoria</button>
+    </div>
+
+    <div class="three" style="margin-top: 12px;">
+      <div class="field">
+        <label style="font-size:12px; text-align:center;">Singole</label>
+        <input type="color" id="setColS">
+      </div>
+      <div class="field">
+        <label style="font-size:12px; text-align:center;">Ricorrenti</label>
+        <input type="color" id="setColR">
+      </div>
+      <div class="field">
+        <label style="font-size:12px; text-align:center;">Rate</label>
+        <input type="color" id="setColI">
+      </div>
+    </div>
+
+    <div class="actions" style="margin-top: 16px;">
+      <button class="btn quiet" type="button" id="closeSet">Chiudi</button>
+      <button class="btn" type="submit">Salva</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+  var KEY='spese-rate-v1';
+  var SET_KEY='spese-rate-settings-v2';
+  var EUR=new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'});
+  var EUR0=new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  var fmt=function(n){return EUR.format(n)};
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function uid(){ return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+
+  // --- IMPOSTAZIONI UTENTE ---
+  var appSettings = {
+    name: '',
+    cats: ['Casa', 'Cibo', 'Trasporti', 'Abbonamenti', 'Salute', 'Svago', 'Shopping', 'Altro'],
+    cols: { s: '#3451D1', r: '#1B8F80', i: '#E8582A' }
+  };
+  var tempCats = [];
+
+  function loadSettingsLocally() {
+    try {
+      var r = localStorage.getItem(SET_KEY);
+      if(r) appSettings = Object.assign(appSettings, JSON.parse(r));
+    } catch(e) {}
+    applySettings();
+  }
+
+  function saveSettingsLocally() {
+    saveSettingsCore();
+    if(cloud.onSettings) cloud.onSettings(appSettings);
+    try{
+      if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.saveSettings){
+        window.webkit.messageHandlers.saveSettings.postMessage(JSON.stringify(appSettings));
+      }
+    }catch(e){}
+  }
+  function saveSettingsCore() {
+    localStorage.setItem(SET_KEY, JSON.stringify(appSettings));
+    applySettings();
+  }
+
+  function applySettings() {
+    var root = document.documentElement;
+    root.style.setProperty('--single', appSettings.cols.s);
+    root.style.setProperty('--recurring', appSettings.cols.r);
+    root.style.setProperty('--rate', appSettings.cols.i);
+    // NOTA: --accent rimane intoccato per mantenere l'identità dell'app
+    
+    var initials = appSettings.name ? appSettings.name.substring(0,2).toUpperCase() : 'U';
+    $('avatarInitials').textContent = initials;
+    $('greeting').textContent = 'Ciao, ' + (appSettings.name.split(' ')[0] || 'Utente') + '!';
+
+    var catSelect = $('fCat');
+    var currentVal = catSelect.value;
+    catSelect.innerHTML = appSettings.cats.map(function(c){return '<option>'+esc(c)+'</option>'}).join('');
+    if(appSettings.cats.indexOf(currentVal) >= 0) catSelect.value = currentVal;
+    else if(appSettings.cats.length) catSelect.value = appSettings.cats[0];
+  }
+
+  // --- ONBOARDING (Primo avvio) ---
+  var hasOnboarded = localStorage.getItem('alestore-onboarded');
+  if(!hasOnboarded) {
+    if(typeof $('dlgWelcome').showModal === 'function') $('dlgWelcome').showModal();
+    else $('dlgWelcome').setAttribute('open', '');
+  }
+  
+  $('btnWelcomeNext').addEventListener('click', function() {
+    $('slide1').hidden = true;
+    $('slide2').hidden = false;
+  });
+  
+  $('btnWelcomeStart').addEventListener('click', function() {
+    var n = $('welcomeName').value.trim() || 'Utente';
+    appSettings.name = n;
+    saveSettingsLocally();
+    localStorage.setItem('alestore-onboarded', 'true');
+    if(typeof $('dlgWelcome').close === 'function') $('dlgWelcome').close();
+    else $('dlgWelcome').removeAttribute('open');
+  });
+
+  // --- PROVIDER ICONS HELPER ---
+  function getProviderIcon(name) {
+    var n = (name||'').toLowerCase();
+    if(n.includes('klarna')) return '<span class="prov-icon" style="background:#FFA8C5; color:#0A0A0A;">K</span>';
+    if(n.includes('paypal')) return '<span class="prov-icon" style="background:#003087; color:#FFF;">P</span>';
+    if(n.includes('scalapay')) return '<span class="prov-icon" style="background:#FDDBD3; color:#0A0A0A;">S</span>';
+    if(n.includes('cofidis')) return '<span class="prov-icon" style="background:#FFDE00; color:#E30613;">C</span>';
+    if(n.includes('compass')) return '<span class="prov-icon" style="background:#0055A5; color:#FFDD00;">C</span>';
+    if(n.includes('findomestic')) return '<span class="prov-icon" style="background:#008A3B; color:#FFF;">F</span>';
+    return '<span style="font-size:13px; margin-right:4px;">💳</span>';
+  }
+
+  // --- GESTIONE DATI E SYNC ---
+  var items = [];
+  var cloud = { onItems: null, onSettings: null };
+  var NATIVE = !!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.saveData);
+  cloud.native = NATIVE;
+  
+  window.receiveDataFromSwift = function(jsonString) {
+    try {
+      var a = JSON.parse(jsonString);
+      items = Array.isArray(a) ? a : [];
+      render();
+    } catch(e) { items = []; }
+  };
+
+  function save(){
+    persistLocal();
+    if(cloud.onItems) cloud.onItems(items);
+  }
+  function persistLocal(){
+    try {
+      var jsonStr = JSON.stringify(items);
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.saveData) {
+        window.webkit.messageHandlers.saveData.postMessage(jsonStr);
+      } else {
+        localStorage.setItem(KEY, jsonStr);
+      }
+    } catch(e) {}
+  }
+  
+  function loadFallback(){
+    try {
+      var r = localStorage.getItem(KEY);
+      if(!r) return [];
+      var a = JSON.parse(r); return Array.isArray(a)?a:[];
+    } catch(e) { return []; }
+  }
+  
+  if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.saveData) {
+    items = loadFallback();
+  }
+  
+  // --- CORE APP ---
+  var now=new Date();
+  var todayIdx=now.getFullYear()*12+now.getMonth();
+  var view=todayIdx;
+  var pendingDelete=null;
+  var editingId=null;
+
+  function idxOf(ym){ var p=String(ym).split('-'); return (+p[0])*12+(+p[1]-1); }
+  function ymOf(idx){ return Math.floor(idx/12)+'-'+String(idx%12+1).padStart(2,'0'); }
+  function daysIn(idx){ return new Date(Math.floor(idx/12),idx%12+1,0).getDate(); }
+  function mLabel(idx,opts){
+    var d=new Date(Math.floor(idx/12),idx%12,1);
+    var s=d.toLocaleDateString('it-IT',opts||{month:'long',year:'numeric'});
+    return s.charAt(0).toUpperCase()+s.slice(1);
+  }
+  function lower(s){ return s.charAt(0).toLowerCase()+s.slice(1); }
+
+  function occ(idx){
+    var out=[];
+    items.forEach(function(it){
+      try{
+        if(it.type==='single'){
+          if(idxOf(it.date.slice(0,7))===idx) out.push({it:it,day:+it.date.slice(8,10)});
+        }else if(it.type==='recurring'){
+          var s=idxOf(it.start), e=it.end?idxOf(it.end):Infinity;
+          if(idx>=s && idx<=e) out.push({it:it,day:Math.min(it.day,daysIn(idx))});
+        }else if(it.type==='installment'){
+          var i=idx-idxOf(it.start);
+          if(i>=0 && i<it.count) out.push({it:it,day:Math.min(it.day,daysIn(idx)),n:i+1});
+        }
+      }catch(e){}
+    });
+    return out;
+  }
+
+  function renderHero(o){
+    var sums={single:0,recurring:0,installment:0};
+    o.forEach(function(x){ sums[x.it.type]+=x.it.amount; });
+    var total=sums.single+sums.recurring+sums.installment;
+    $('monthLabel').textContent=mLabel(view);
+    $('heroLabel').textContent='Uscite di '+lower(mLabel(view));
+    $('total').textContent=fmt(total);
+
+    var pct=function(v){ return total>0?(v/total*100):0; };
+    $('bar').innerHTML=
+      '<span class="s" style="width:'+pct(sums.single)+'%"></span>'+
+      '<span class="r" style="width:'+pct(sums.recurring)+'%"></span>'+
+      '<span class="i" style="width:'+pct(sums.installment)+'%"></span>';
+    $('legend').innerHTML=
+      '<li><i class="dot" style="background:var(--single)"></i>Singole <b>'+fmt(sums.single)+'</b></li>'+
+      '<li><i class="dot" style="background:var(--recurring)"></i>Ricorrenti <b>'+fmt(sums.recurring)+'</b></li>'+
+      '<li><i class="dot" style="background:var(--rate)"></i>Rate <b>'+fmt(sums.installment)+'</b></li>';
+
+    var st=$('status');
+    if(view===todayIdx){
+      var d=now.getDate(), paid=0;
+      o.forEach(function(x){ if(x.day<=d) paid+=x.it.amount; });
+      st.innerHTML='Già addebitato <b>'+fmt(paid)+'</b> &middot; In arrivo <b>'+fmt(Math.max(0,total-paid))+'</b>';
+    }else if(view<todayIdx){
+      st.textContent='Mese concluso.';
+    }else{
+      st.textContent='Previsione per questo mese futuro.';
+    }
+  }
+
+  function groupHtml(type,title,list){
+    if(!list.length) return '';
+    list.sort(function(a,b){ return a.day-b.day; });
+    var sub=0; list.forEach(function(x){ sub+=x.it.amount; });
+    var rows=list.map(function(x){
+      var it=x.it, meta='';
+      if(type==='installment') meta= getProviderIcon(it.provider) + esc(it.provider||'Rata') + ' &middot; rata ' + x.n + ' di ' + it.count;
+      else if(type==='recurring') meta=esc(it.category||'Altro')+' &middot; mensile';
+      else meta=esc(it.category||'Altro');
+      
+      var delLabel=(pendingDelete===it.id)?'Sicuro?':'Elimina';
+      var delCls=(pendingDelete===it.id)?'link danger':'link';
+      return '<li class="row"><span class="day" title="Giorno '+x.day+'">'+x.day+'</span>'+
+        '<div class="what"><strong>'+esc(it.name)+'</strong><span class="meta">'+meta+'</span></div>'+
+        '<span class="amt">'+fmt(it.amount)+'</span>'+
+        '<div class="acts"><button class="link" data-act="edit" data-id="'+it.id+'">Modifica</button>'+
+        '<button class="'+delCls+'" data-act="del" data-id="'+it.id+'">'+delLabel+'</button></div></li>';
+    }).join('');
+    return '<div class="group t-'+type+'"><h3><i class="dot"></i>'+title+'<span class="sub">'+fmt(sub)+'</span></h3><ul class="rows">'+rows+'</ul></div>';
+  }
+
+  function renderList(o){
+    var by={single:[],recurring:[],installment:[]};
+    o.forEach(function(x){ by[x.it.type].push(x); });
+    var html=groupHtml('installment','Rate',by.installment)+
+             groupHtml('recurring','Ricorrenti',by.recurring)+
+             groupHtml('single','Spese singole',by.single);
+    $('list').innerHTML=html||'<p class="empty">Nessun movimento in questo mese. Usa il tasto + per inserirne uno.</p>';
+  }
+
+  function renderPlans(){
+    var plans=items.filter(function(it){
+      if(it.type!=='installment') return false;
+      return idxOf(it.start)+it.count-1>=view;
+    }).sort(function(a,b){ return (idxOf(a.start)+a.count)-(idxOf(b.start)+b.count); });
+
+    var remaining=0, lastEnd=-1;
+    var html=plans.map(function(it){
+      var s=idxOf(it.start);
+      var paid=Math.max(0,Math.min(it.count,view-s+1));
+      var left=it.amount*(it.count-paid);
+      remaining+=left; lastEnd=Math.max(lastEnd,s+it.count-1);
+      var state=(view<s)?('Parte a '+lower(mLabel(s))):(paid+' di '+it.count+' pagate &middot; restano '+fmt(left));
+      
+      var provName = it.provider ? getProviderIcon(it.provider) + esc(it.provider) + ' · ' : '';
+      
+      return '<div class="plan"><div class="plan-head"><strong>'+provName+esc(it.name)+'</strong><span class="amt">'+fmt(it.amount)+'/mese</span></div>'+
+        '<div class="track"><i style="width:'+(paid/it.count*100)+'%"></i></div>'+
+        '<div class="meta" style="margin-top:0;">'+state+'</div></div>';
+    }).join('');
+    $('plans').innerHTML=html||'<p class="empty">Nessuna rata in corso.</p>';
+    var rem=$('remaining');
+    if(plans.length){
+      rem.hidden=false;
+      rem.innerHTML='Ancora da pagare: <b>'+fmt(remaining)+'</b><br><span class="meta" style="margin-top:4px;">Ultima rata a '+lower(mLabel(lastEnd))+'</span>';
+    }else{ rem.hidden=true; }
+  }
+
+  function renderProj(){
+    var n=6, data=[], j;
+    for(j=0;j<n;j++){
+      var idx=view+j, r=0, c=0;
+      occ(idx).forEach(function(x){
+        if(x.it.type==='installment') r+=x.it.amount;
+        else if(x.it.type==='recurring') c+=x.it.amount;
+      });
+      data.push({idx:idx,r:r,c:c});
+    }
+    var max=Math.max(1,Math.max.apply(null,data.map(function(d){return d.r+d.c;})));
+    var W=360,H=190,padX=8,top=28,base=H-28;
+    var slot=(W-padX*2)/n, bw=Math.min(36,slot*0.6);
+    var s='', aria=[];
+    data.forEach(function(d,k){
+      var x=padX+slot*k+(slot-bw)/2;
+      var hr=(d.r/max)*(base-top), hc=(d.c/max)*(base-top);
+      var yC=base-hc, yR=yC-hr;
+      if(hc>0) s+='<rect class="b-rec" x="'+x+'" y="'+yC+'" width="'+bw+'" height="'+hc+'" rx="3"/>';
+      if(hr>0) s+='<rect class="b-rate" x="'+x+'" y="'+yR+'" width="'+bw+'" height="'+hr+'" rx="3"/>';
+      var tot=d.r+d.c;
+      s+='<text class="v" x="'+(x+bw/2)+'" y="'+((tot>0?yR:base)-6)+'">'+(tot>0?EUR0.format(tot):'–')+'</text>';
+      s+='<text x="'+(x+bw/2)+'" y="'+(base+16)+'">'+mLabel(d.idx,{month:'short'}).replace('.','')+'</text>';
+      aria.push(mLabel(d.idx)+': '+fmt(tot));
+    });
+    s+='<line x1="'+padX+'" x2="'+(W-padX)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/>';
+    var svg=$('proj');
+    svg.innerHTML=s;
+  }
+
+  function renderCats(o){
+    var map={}, total=0;
+    o.forEach(function(x){ var c=x.it.category||'Altro'; map[c]=(map[c]||0)+x.it.amount; total+=x.it.amount; });
+    var keys=Object.keys(map).sort(function(a,b){ return map[b]-map[a]; });
+    $('cats').innerHTML=keys.length?keys.map(function(k){
+      var p=map[k]/total*100;
+      return '<div class="cat"><div class="cat-head"><span>'+esc(k)+'</span><span class="amt">'+fmt(map[k])+'</span></div>'+
+        '<div class="track"><i class="c" style="width:'+p+'%"></i></div></div>';
+    }).join(''):'<p class="empty">Nessuna uscita da raggruppare in questo mese.</p>';
+  }
+
+  function render(){
+    var o=occ(view);
+    renderHero(o); renderCats(o); renderList(o); renderPlans(); renderProj();
+  }
+
+  // --- GESTIONE MODALE VOCE ---
+  var dlg=$('dlg'), f=$('f');
+  function typeVal(){ return f.querySelector('input[name="type"]:checked').value; }
+  function show(id,on){ $(id).hidden=!on; }
+
+  function syncType(){
+    var t=typeVal();
+    $('lName').textContent = t==='single'?'Descrizione':(t==='recurring'?'Nome (es. affitto, Netflix)':'Cosa hai acquistato');
+    $('lAmount').textContent = t==='installment'?'Importo singola rata (€)':(t==='recurring'?'Importo mensile (€)':'Importo (€)');
+    $('lStart').textContent = t==='installment'?'Primo addebito':'Dal mese';
+    show('gProvider',t==='installment');
+    show('gCount',t==='installment');
+    $('gDate').hidden=(t!=='single');
+    show('gStartRow',t!=='single');
+    show('gEnd',t==='recurring');
+    show('gCat',true);
+  }
+  f.querySelectorAll('input[name="type"]').forEach(function(r){ r.addEventListener('change',syncType); });
+
+  function defaultDate(){
+    if(view===todayIdx){
+      return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+    }
+    return ymOf(view)+'-01';
+  }
+
+  function openDlg(it){
+    editingId=it?it.id:null;
+    $('err').textContent='';
+    $('dlgTitle').textContent=it?'Modifica voce':'Nuova voce';
+    var t=it?it.type:'single';
+    f.querySelector('input[name="type"][value="'+t+'"]').checked=true;
+    $('fName').value=it?it.name:'';
+    $('fProvider').value=it&&it.provider?it.provider:'';
+    $('fAmount').value=it?it.amount:'';
+    $('fCount').value=it&&it.count?it.count:3;
+    $('fDate').value=it&&it.date?it.date:defaultDate();
+    $('fStart').value=it&&it.start?it.start:ymOf(view);
+    $('fDay').value=it&&it.day?it.day:now.getDate();
+    $('fEnd').value=it&&it.end?it.end:'';
+    
+    // Assicurati che la categoria esista, sennò fallback
+    if(it && it.category) {
+       var opt = Array.from($('fCat').options).find(function(o){return o.value===it.category});
+       if(!opt) {
+          var newOpt = document.createElement('option');
+          newOpt.text = it.category;
+          $('fCat').add(newOpt);
+       }
+       $('fCat').value = it.category;
+    } else {
+       $('fCat').selectedIndex = 0;
+    }
+    
+    syncType();
+    if(typeof dlg.showModal==='function') dlg.showModal(); else dlg.setAttribute('open','');
+  }
+  function closeDlg(){ if(typeof dlg.close==='function') dlg.close(); else dlg.removeAttribute('open'); }
+
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var t=typeVal();
+    var name=$('fName').value.trim();
+    var amount=parseFloat($('fAmount').value);
+    var err='';
+    if(!name) err='Scrivi un nome per questa voce.';
+    else if(!(amount>0)) err='Inserisci un importo maggiore di zero.';
+    var d={type:t,name:name,amount:Math.round(amount*100)/100};
+    if(!err){
+      if(t==='single'){
+        var dt=$('fDate').value;
+        if(!/^\d{4}-\d{2}-\d{2}$/.test(dt)) err='Scegli la data della spesa.';
+        d.date=dt; d.category=$('fCat').value;
+      }else{
+        var st=$('fStart').value, day=parseInt($('fDay').value,10);
+        if(!/^\d{4}-\d{2}$/.test(st)) err='Scrivi il mese di partenza (es. 2026-10).';
+        else if(!(day>=1 && day<=31)) err='Giorno tra 1 e 31.';
+        d.start=st; d.day=day;
+        if(!err && t==='recurring'){
+          var en=$('fEnd').value;
+          if(en && !/^\d{4}-\d{2}$/.test(en)) err='Mese di fine (es. 2027-06).';
+          else if(en && idxOf(en)<idxOf(st)) err='Mese di fine errato.';
+          d.end=en||''; d.category=$('fCat').value;
+        }
+        if(!err && t==='installment'){
+          var c=parseInt($('fCount').value,10);
+          if(!(c>=1 && c<=120)) err='Numero rate tra 1 e 120.';
+          d.count=c; d.provider=$('fProvider').value.trim(); d.category=$('fCat').value;
+        }
+      }
+    }
+    if(err){ $('err').textContent=err; return; }
+    if(editingId){ items=items.map(function(x){ return x.id===editingId?Object.assign({},d,{id:editingId}):x; }); }
+    else{ d.id=uid(); items.push(d); }
+    if(t==='single') view=idxOf(d.date.slice(0,7));
+    save(); closeDlg(); render();
+  });
+  $('cancel').addEventListener('click',closeDlg);
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) closeDlg(); });
+
+  // Eventi app
+  $('add').addEventListener('click',function(){ openDlg(null); });
+  $('prev').addEventListener('click',function(){ view--; pendingDelete=null; render(); });
+  $('next').addEventListener('click',function(){ view++; pendingDelete=null; render(); });
+  $('today').addEventListener('click',function(){ view=todayIdx; pendingDelete=null; render(); });
+
+  $('list').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-act]'); if(!b) return;
+    var id=b.getAttribute('data-id');
+    if(b.getAttribute('data-act')==='edit'){
+      var it=items.filter(function(x){return x.id===id;})[0];
+      if(it) openDlg(it);
+    }else{
+      if(pendingDelete===id){
+        items=items.filter(function(x){return x.id!==id;});
+        pendingDelete=null; save(); render();
+      }else{ pendingDelete=id; render(); }
+    }
+  });
+  document.addEventListener('click',function(e){
+    if(pendingDelete && !e.target.closest('[data-act="del"]')){ pendingDelete=null; render(); }
+  });
+
+  // --- MODALE IMPOSTAZIONI (Profilo) ---
+  var dlgSet=$('dlgSet'), fSet=$('fSet');
+  
+  function renderSettingsCats() {
+    var ul = $('setCatList');
+    if(!tempCats.length) {
+      ul.innerHTML = '<li><span style="color:var(--muted)">Nessuna categoria</span></li>';
+      return;
+    }
+    ul.innerHTML = tempCats.map(function(c, i){
+      return '<li><span>'+esc(c)+'</span><button type="button" class="link danger" onclick="window.removeCat('+i+')">Rimuovi</button></li>';
+    }).join('');
+  }
+  
+  window.removeCat = function(idx) {
+    tempCats.splice(idx, 1);
+    renderSettingsCats();
+  };
+  
+  $('btnAddCat').addEventListener('click', function() {
+    var c = prompt("Nome della nuova categoria:");
+    if(c && c.trim()) {
+      tempCats.push(c.trim());
+      renderSettingsCats();
+    }
+  });
+
+  $('btnSettings').addEventListener('click', function(){
+    $('setName').value = appSettings.name;
+    $('setColS').value = appSettings.cols.s;
+    $('setColR').value = appSettings.cols.r;
+    $('setColI').value = appSettings.cols.i;
+    tempCats = appSettings.cats.slice();
+    renderSettingsCats();
+    if(typeof dlgSet.showModal==='function') dlgSet.showModal(); else dlgSet.setAttribute('open','');
+  });
+  
+  function closeSettings() {
+    if(typeof dlgSet.close==='function') dlgSet.close(); else dlgSet.removeAttribute('open');
+  }
+  $('closeSet').addEventListener('click', closeSettings);
+  dlgSet.addEventListener('click', function(e){ if(e.target===dlgSet) closeSettings(); });
+
+  fSet.addEventListener('submit', function(e){
+    e.preventDefault();
+    appSettings.name = $('setName').value.trim() || 'Utente';
+    appSettings.cats = tempCats.slice();
+    if(appSettings.cats.length === 0) appSettings.cats = ['Altro']; // Evita array vuoto
+    appSettings.cols.s = $('setColS').value;
+    appSettings.cols.r = $('setColR').value;
+    appSettings.cols.i = $('setColI').value;
+    saveSettingsLocally();
+    closeSettings();
+    render();
+  });
+
+  // --- BACKUP E IMPORTAZIONE ---
+  function msg(t){ $('bkMsg').textContent=t; }
+  function backupJson(){
+    return JSON.stringify({app:'spese-rate',version:1,exportedAt:new Date().toISOString(),items:items},null,2);
+  }
+  
+  $('bkSave').addEventListener('click',function(){
+    var json=backupJson();
+    var name='spese-rate-'+defaultDateToday()+'.json';
+    
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.exportBackup) {
+      window.webkit.messageHandlers.exportBackup.postMessage({ filename: name, data: json });
+      msg('Menu di esportazione aperto.');
+      return;
+    }
+    
+    // Web/Electron fallback
+    var a=document.createElement('a');
+    a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json);
+    a.download=name; a.click();
+    msg('Backup scaricato ('+items.length+' voci).');
+  });
+
+  function clean(raw){
+    if(!raw || typeof raw!=='object') return null;
+    var t=raw.type, name=typeof raw.name==='string'?raw.name.trim().slice(0,80):'', amount=Number(raw.amount);
+    if(['single','recurring','installment'].indexOf(t)<0 || !name || !isFinite(amount) || !(amount>0)) return null;
+    var o={id:(typeof raw.id==='string' && /^[\w-]{1,40}$/.test(raw.id))?raw.id:uid(),type:t,name:name,amount:Math.round(amount*100)/100};
+    o.category=raw.category||'Altro';
+    var ym=/^\d{4}-\d{2}$/, day=parseInt(raw.day,10);
+    if(t==='single'){
+      if(typeof raw.date!=='string' || !/^\d{4}-\d{2}-\d{2}$/.test(raw.date)) return null;
+      o.date=raw.date;
+    }else{
+      if(typeof raw.start!=='string' || !ym.test(raw.start) || !(day>=1 && day<=31)) return null;
+      o.start=raw.start; o.day=day;
+      if(t==='recurring'){
+        if(raw.end && (typeof raw.end!=='string' || !ym.test(raw.end))) return null;
+        o.end=raw.end||'';
+      }else{
+        var c=parseInt(raw.count,10);
+        if(!(c>=1 && c<=120)) return null;
+        o.count=c; o.provider=typeof raw.provider==='string'?raw.provider.trim().slice(0,40):'';
+      }
+    }
+    return o;
+  }
+  
+  var staged=null;
+  function stageImport(text){
+    var data;
+    try{ data=JSON.parse(text); }catch(e){ msg('File non valido.'); return; }
+    var list=Array.isArray(data)?data:(data && Array.isArray(data.items)?data.items:null);
+    if(!list){ msg('Nessuna voce trovata.'); return; }
+    var ok=[], bad=0;
+    list.forEach(function(r){ var c=clean(r); if(c) ok.push(c); else bad++; });
+    if(!ok.length){ msg('Nessuna voce valida.'); return; }
+    staged=ok;
+    $('choiceText').textContent='Trovate '+ok.length+' voci valide. Cosa vuoi fare?';
+    $('choice').hidden=false; msg('');
+  }
+  function finish(m){
+    staged=null; $('choice').hidden=true;
+    pendingDelete=null; save(); render(); msg(m);
+  }
+
+  function defaultDateToday(){
+    return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  }
+  $('bkImport').addEventListener('click',function(){ $('bkFile').click(); });
+  $('bkFile').addEventListener('change',function(){
+    var file=this.files && this.files[0]; if(!file) return;
+    var r=new FileReader();
+    r.onload=function(){ stageImport(String(r.result)); };
+    r.readAsText(file); this.value='';
+  });
+  $('bkMerge').addEventListener('click',function(){
+    if(!staged) return;
+    var byId={}; items.forEach(function(x){ byId[x.id]=x; }); staged.forEach(function(x){ byId[x.id]=x; });
+    items=Object.keys(byId).map(function(k){ return byId[k]; });
+    finish('Backup unito ('+items.length+' voci).');
+  });
+  $('bkReplace').addEventListener('click',function(){
+    if(!staged) return; items=staged.slice();
+    finish('Dati sostituiti ('+items.length+' voci).');
+  });
+  $('bkCancel').addEventListener('click',function(){ staged=null; $('choice').hidden=true; });
+
+  // --- PONTE VERSO IL CLOUD (usato dal modulo Firebase) ---
+  Object.assign(cloud, {
+    getItems: function(){ return items; },
+    getSettings: function(){ return appSettings; },
+    setItemsFromCloud: function(list){
+      items = Array.isArray(list) ? list : [];
+      pendingDelete = null;
+      persistLocal();
+      render();
+    },
+    setSettingsFromCloud: function(s){
+      if(!s || typeof s !== 'object') return;
+      appSettings = Object.assign({}, appSettings, s);
+      appSettings.cols = Object.assign({ s:'#3451D1', r:'#1B8F80', i:'#E8582A' }, appSettings.cols);
+      if(!Array.isArray(appSettings.cats) || !appSettings.cats.length) appSettings.cats = ['Altro'];
+      saveSettingsCore();
+      if(appSettings.name){
+        try{ localStorage.setItem('alestore-onboarded','true'); }catch(e){}
+        var w = $('dlgWelcome');
+        if(w.open){ if(typeof w.close==='function') w.close(); else w.removeAttribute('open'); }
+      }
+      render();
+    },
+    clearLocal: function(){
+      items = [];
+      try{ localStorage.removeItem(KEY); localStorage.removeItem(SET_KEY); localStorage.removeItem('alestore-onboarded'); }catch(e){}
+      appSettings = {
+        name: '',
+        cats: ['Casa', 'Cibo', 'Trasporti', 'Abbonamenti', 'Salute', 'Svago', 'Shopping', 'Altro'],
+        cols: { s: '#3451D1', r: '#1B8F80', i: '#E8582A' }
+      };
+      applySettings();
+      render();
+    }
+  });
+  window.alestore = cloud;
+
+  function nativeHandler(name){
+    return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[name];
+  }
+  function startSignIn(){
+    if(NATIVE){
+      var h = nativeHandler('authAction');
+      if(h) h.postMessage({ action: 'signIn', settings: appSettings });
+      else $('cloudMsg').textContent = 'Accesso non disponibile in questa versione.';
+      return;
+    }
+    if(cloud.signIn) cloud.signIn();
+    else $('cloudMsg').textContent = 'Sincronizzazione non disponibile: controlla la connessione e ricarica la pagina.';
+  }
+  $('btnSignIn').addEventListener('click', startSignIn);
+  $('btnSignOut').addEventListener('click', function(){
+    if(NATIVE){ var h = nativeHandler('authAction'); if(h) h.postMessage({ action: 'signOut' }); return; }
+    if(cloud.signOut) cloud.signOut();
+  });
+
+  // App nativa (iOS): login Google e Firestore li gestisce Swift, la pagina riceve gli aggiornamenti
+  if(NATIVE){
+    $('btnWelcomeSignIn').hidden = false;
+    $('btnWelcomeSignIn').addEventListener('click', startSignIn);
+    window.receiveSettingsFromSwift = function(json){
+      try{ cloud.setSettingsFromCloud(JSON.parse(json)); }catch(e){}
+    };
+    window.receiveAuthState = function(st){
+      st = st || {};
+      var on = !!st.signedIn;
+      $('btnSignIn').hidden = on; $('btnSignOut').hidden = !on; $('btnWelcomeSignIn').hidden = on;
+      $('cloudStatus').textContent = on
+        ? 'Connesso come ' + (st.email || 'utente') + (st.status ? ' \u00b7 ' + st.status : '')
+        : 'Accedi con Google per avere i dati su tutti i tuoi dispositivi.';
+      $('cloudMsg').textContent = st.message || '';
+      if(st.cleared) cloud.clearLocal();
+    };
+  }
+
+  // Inizializza Settings & UI
+  loadSettingsLocally();
+  render();
+
+})();
+</script>
+
+<script type="module">
+async function startWebSync() {
+const [{ initializeApp }, { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged }, { initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, onSnapshot, setDoc, writeBatch }] = await Promise.all([
+  import("https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js"),
+  import("https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js"),
+  import("https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js"),
+]);
+
+// Configurazione del progetto Firebase (la apiKey web non è un segreto: la sicurezza sta nelle regole di Firestore)
+const firebaseConfig = {
+  apiKey: "AIzaSyDK_H3_IVBoD7Wcv1gBQUjgT0IR3XZx_Ic",
+  authDomain: "alestorecontability.firebaseapp.com",
+  projectId: "alestorecontability",
+  storageBucket: "alestorecontability.firebasestorage.app",
+  messagingSenderId: "475400555607",
+  appId: "1:475400555607:web:ca634001fc4f5d0b65a712",
+  measurementId: "G-X6C9SXB8R6"
+};
+
+const A = window.alestore;
+const $ = (id) => document.getElementById(id);
+const statusEl = $('cloudStatus'), msgEl = $('cloudMsg');
+const inBtn = $('btnSignIn'), outBtn = $('btnSignOut'), wBtn = $('btnWelcomeSignIn');
+const IDLE_TEXT = 'Accedi con Google per avere i dati su tutti i tuoi dispositivi.';
+const say = (t) => { msgEl.textContent = t || ''; };
+const stable = (o) => JSON.stringify(o, Object.keys(o).sort());
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+let db;
+try {
+  // cache su disco: l'app funziona anche offline e si risincronizza da sola
+  db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+} catch (e) {
+  db = getFirestore(app);
+}
+const provider = new GoogleAuthProvider();
+
+let user = null, unsubItems = null, unsubSettings = null;
+let remote = new Map();   // id -> ultima versione nota nel cloud (per mandare solo le differenze)
+
+const itemsCol = () => collection(db, 'users', user.uid, 'items');
+const settingsRef = () => doc(db, 'users', user.uid, 'meta', 'settings');
+
+function renderStatus(state) {
+  statusEl.textContent = 'Connesso come ' + (user.email || user.displayName || 'utente') + (state ? ' · ' + state : '');
+}
+
+async function pushItems(list) {
+  if (!user) return;
+  const col = itemsCol();
+  const ops = [];
+  const ids = new Set();
+  for (const it of list) {
+    ids.add(it.id);
+    const s = stable(it);
+    if (remote.get(it.id) !== s) { ops.push((b) => b.set(doc(col, it.id), it)); remote.set(it.id, s); }
+  }
+  for (const id of [...remote.keys()]) {
+    if (!ids.has(id)) { ops.push((b) => b.delete(doc(col, id))); remote.delete(id); }
+  }
+  for (let i = 0; i < ops.length; i += 400) {
+    const batch = writeBatch(db);
+    ops.slice(i, i + 400).forEach((op) => op(batch));
+    try { await batch.commit(); }
+    catch (e) { say('Sincronizzazione non riuscita (' + (e.code || e.message) + ').'); return; }
+  }
+  if (ops.length) say('');
+}
+
+function pushSettings(s) {
+  if (!user) return;
+  setDoc(settingsRef(), { name: s.name || '', cats: s.cats, cols: s.cols })
+    .catch((e) => say('Impostazioni non sincronizzate (' + (e.code || e.message) + ').'));
+}
+
+function stopListeners() {
+  if (unsubItems) { unsubItems(); unsubItems = null; }
+  if (unsubSettings) { unsubSettings(); unsubSettings = null; }
+  remote = new Map();
+}
+
+function startListeners() {
+  const mergedKey = 'alestore-merged-' + user.uid;
+  const isMerged = () => { try { return localStorage.getItem(mergedKey) === '1'; } catch (e) { return false; } };
+
+  unsubItems = onSnapshot(itemsCol(), { includeMetadataChanges: true }, (snap) => {
+    const list = [];
+    remote = new Map();
+    snap.forEach((d) => { const it = d.data(); it.id = d.id; list.push(it); remote.set(d.id, stable(it)); });
+    renderStatus((snap.metadata.fromCache || snap.metadata.hasPendingWrites) ? 'sincronizzazione…' : 'sincronizzato');
+
+    if (!isMerged()) {
+      // primo accesso su questo dispositivo: unisco i dati locali a quelli del cloud
+      if (snap.metadata.fromCache) return;
+      const ids = new Set(list.map((x) => x.id));
+      const union = list.concat(A.getItems().filter((x) => !ids.has(x.id)));
+      try { localStorage.setItem(mergedKey, '1'); } catch (e) {}
+      A.setItemsFromCloud(union);
+      pushItems(union);
+      return;
+    }
+    A.setItemsFromCloud(list);   // da qui in poi il cloud è la fonte di verità
+  }, (err) => say('Errore di sincronizzazione: ' + (err.code || err.message)));
+
+  unsubSettings = onSnapshot(settingsRef(), { includeMetadataChanges: true }, (snap) => {
+    if (snap.exists()) A.setSettingsFromCloud(snap.data());
+    else if (!snap.metadata.fromCache) { const s = A.getSettings(); if (s.name) pushSettings(s); }
+  }, (err) => say('Errore di sincronizzazione: ' + (err.code || err.message)));
+}
+
+async function signIn() {
+  say('');
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (e) {
+    if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') {
+      try { await signInWithRedirect(auth, provider); } catch (e2) { say('Accesso non riuscito (' + (e2.code || e2.message) + ').'); }
+    } else if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+      say('Accesso non riuscito (' + (e.code || e.message) + ').');
+    }
+  }
+}
+
+async function doSignOut() {
+  say('');
+  stopListeners(); A.onItems = null; A.onSettings = null;
+  try { await signOut(auth); A.clearLocal(); }
+  catch (e) { say('Uscita non riuscita (' + (e.code || e.message) + ').'); }
+}
+
+A.signIn = signIn;
+A.signOut = doSignOut;
+wBtn.addEventListener('click', signIn);
+
+onAuthStateChanged(auth, (u) => {
+  stopListeners();
+  user = u;
+  if (u) {
+    A.onItems = pushItems; A.onSettings = pushSettings;
+    inBtn.hidden = true; outBtn.hidden = false; wBtn.hidden = true;
+    renderStatus('sincronizzazione…');
+    startListeners();
+  } else {
+    A.onItems = null; A.onSettings = null;
+    inBtn.hidden = false; outBtn.hidden = true; wBtn.hidden = false;
+    statusEl.textContent = IDLE_TEXT;
+  }
+});
+}
+
+if (!window.alestore.native) {
+  startWebSync().catch((e) => {
+    const el = document.getElementById('cloudStatus');
+    if (el) el.textContent = 'Sincronizzazione non disponibile (sei offline?).';
+    console.error(e);
+  });
+}
+</script>
+</body>
+</html>
