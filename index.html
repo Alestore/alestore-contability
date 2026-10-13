@@ -5,22 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Alestore Flow</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='11'%20fill='%233451D1'/%3E%3Cpath%20d='M11%2025%20L20%209%20L29%2025'%20fill='none'%20stroke='%23FFFFFF'%20stroke-width='3.4'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Crect%20x='10'%20y='29'%20width='8'%20height='4'%20rx='2'%20fill='%23FFFFFF'/%3E%3Crect%20x='19'%20y='29'%20width='5.5'%20height='4'%20rx='2'%20fill='%234CC7B5'/%3E%3Crect%20x='25.5'%20y='29'%20width='4.5'%20height='4'%20rx='2'%20fill='%23FF8A5E'/%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAEG0lEQVRYhb2WXVCUVRjHf+fdd5fdFXAlEZYGxbAPZkMIBXSkdMaMmqYScCuzNBpqGhtTbrprxu6rmYouGvwYk4sEw7xgjJqyiQvJxZGlwFEqI4LFj+Jr2UXY9z1dLK7AwuouH/+7c87/Oc//nOc5z3ME0+B01hr+Gn+oTBdKGcgCAamAeTrvHuEHuoCfkPJoyze556cTxORBXql7gyI5BDhidHgXiBqjath/rs7xX5iAdSVtToE8DsQtjPMQLgldKXadzu4OCZg4+Vliv+po8ZtfVTe21zm8itNZa5i49sVyDvCoORD4GEDkb299UQpxIpZd4q0GALw+LRZzTSgyR0GIHbFYZ64001CdRUN1FpkrY7o8g9SVNxQpWB+LdWV5GlaLgtWiUFmeFssWSHhaQWKP1rBoXSKFOfGhcWFOPJvyEqIWIJAZClEmn8EgeHd3atj8/j12DAYxg0VEWJVoLUqfSmJ1elBzk2uIppYhAFanmynZlhTtdkQlwGpRqHCmAKBpkqqaPj455iGgSQDeejkl9DIWRECFM4UkmwrAycZ/+bN7lK6eW9Q3BivrskSV8rIVCyMgLcXES88uB2B4RONQ7fXQ2hdf9THkDdaCnc8tJ91umn8B+16zYzIGk+xI3XUGhgKhtSGvxtGvg4KMqmDvK+FJOicB2Q9b2bpxKQA918aoPXMzjHOi4SbdnlsAPLnJRm7WkvkRIAQc2JOGmHhhn37pYWxchvHGA5LPa/pC4wOv20M2cxJQ/LiNtY9YAfj1so+zzYOzcn84N8jFjhEAHA9aKS6yzU2AySjYuysYTynhw8O9yPDDT8FHh3vRJzj7dtsxx0U+Y8TV7duSsCcHM7qxaYCO332RvQOXr/r5rmkAgBX3GXl+67LYBWgTXdbn16mq8dzV+W1U1Xjw+fUpe8wGsb7EPeulCgGFOQn0XBsLZfi9It0ex/0pJn5xD0cMW0QBiwEV8AHW2QibCxJ59YVk4kx3onWh3ctnxzwoyeMkbBlEMesE+lWGv7dh0/y898CPJKk+jvRsoHlgVST/oyrBf3vWbIz330lnacLUBpOVaaG1Y4S2VX8QlxEMjTF1DK3fwM6/29iadAWADyxnKG55O5KAXgXkt5EYnV3+sDldl3hujBO4MbXma4Mqnb7k0Pif0ch1QEiaRX5Zq0Pqwg3M2EetZoUnChKxmO+EoL3Tz5WrfoSQmNaMoizR0PpVxrqC/4S8xG5STcP83L8GrxahMUl2CID8Ene1hIqIcucZEum+kJOTpwD4VLUSaF9E/35FyDc5KHQFoL3O4RW68gxwaZGc73LVP+aCSZXQdTq726iqRUiOAwtVG9qE0Defr889dXtixoaZX3oxH5RyKdkCZACWGB2OAj2AC8nJlty1pzgo9MmE/wEc11bqRrIghAAAAABJRU5ErkJggg==">
-<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Colori dinamici voci (sovrascritti da JS) */
   --single:#3451D1; --recurring:#1B8F80; --rate:#E8582A;
+  --accent:#3451D1; --on-accent:#FFFFFF; --danger:#B3261E;
   
-  /* Colore identità App (invariabile) */
-  --accent:#3451D1;
-  --on-accent:#FFFFFF;
-  --danger:#B3261E;
-  
-  /* Palette Base Light */
   --bg-gradient: radial-gradient(at 0% 0%, rgba(142, 197, 252, 0.4) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(224, 195, 252, 0.4) 0px, transparent 50%), #F2F4F8;
   --surface-glass: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(255, 255, 255, 0.7);
@@ -35,11 +28,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    /* Colore identità App Dark */
-    --accent:#5C7CFF;
-    --danger:#FF8A80;
-    
-    /* Palette Liquid Glass Dark */
+    --accent:#5C7CFF; --danger:#FF8A80;
     --bg-gradient: radial-gradient(at 0% 0%, rgba(52, 81, 209, 0.25) 0px, transparent 55%), radial-gradient(at 100% 100%, rgba(27, 143, 128, 0.2) 0px, transparent 55%), #0B101E;
     --surface-glass: rgba(22, 30, 51, 0.55);
     --glass-border: rgba(255, 255, 255, 0.08);
@@ -49,24 +38,13 @@
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-
-/* FIX PER ELEMENTI NASCOSTI */
 [hidden] { display: none !important; }
 
-/* NATIVE APP FEELING */
 body {
-  margin:0;
-  background: var(--bg-gradient);
-  background-attachment: fixed;
-  color:var(--ink);
-  font-family:var(--f-body);
-  font-size:16px;
-  line-height:1.5;
-  min-height: 100vh;
-  -webkit-user-select: none; user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  overscroll-behavior: none;
-  -webkit-font-smoothing:antialiased;
+  margin:0; background: var(--bg-gradient); background-attachment: fixed;
+  color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.5; min-height: 100vh;
+  -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none; -webkit-font-smoothing:antialiased;
 }
 input, select, textarea { -webkit-user-select: auto; user-select: auto; }
 ::-webkit-scrollbar { width: 0px; background: transparent; }
@@ -75,15 +53,7 @@ button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 
 .app{max-width:1040px;margin:0 auto;padding:20px 20px 100px}
-
-/* GLASSMORPHISM UTILS */
-.glass {
-  background: var(--surface-glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 12px 40px var(--glass-shadow);
-}
+.glass { background: var(--surface-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); box-shadow: 0 12px 40px var(--glass-shadow); }
 
 /* HEADER & PROFILE */
 .main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
@@ -92,18 +62,10 @@ button,input,select{font:inherit;color:inherit}
 .brand span{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:-0.015em; display: none;}
 @media (min-width: 400px) { .brand span { display: block; } }
 
-.avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  display: grid; place-items: center;
-  font-weight: 700; font-size: 16px; cursor: pointer;
-  color: var(--ink); padding: 0;
-  transition: transform 0.2s, background 0.2s;
-}
+.avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 16px; cursor: pointer; color: var(--ink); padding: 0; transition: transform 0.2s, background 0.2s; overflow:hidden;}
+.avatar img { width:100%; height:100%; object-fit:cover; display: block; }
 .avatar:active { transform: scale(0.92); }
-.avatar { overflow: hidden; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* CONTROLS HEADER */
 .top{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap; margin-bottom: 16px;}
 .month{display:flex;align-items:center;gap:10px}
 .month h1{font-family:var(--f-display);font-size:20px;font-weight:700;margin:0;min-width:13ch;text-align:center}
@@ -113,17 +75,7 @@ button,input,select{font:inherit;color:inherit}
 .btn:active{transform:scale(0.95)}
 .btn.quiet{background:transparent;color:var(--ink);border:1px solid var(--line)}
 
-/* FAB (Floating Action Button) */
-.fab {
-  position: fixed; bottom: max(32px, env(safe-area-inset-bottom, 32px)); right: 24px;
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--accent); color: var(--on-accent);
-  border: none; font-size: 32px;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-  cursor: pointer; z-index: 100;
-  transition: transform 0.2s;
-}
+.fab { position: fixed; bottom: max(32px, env(safe-area-inset-bottom, 32px)); right: 24px; width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: var(--on-accent); border: none; font-size: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px rgba(0,0,0,0.25); cursor: pointer; z-index: 100; transition: transform 0.2s; }
 .fab:active { transform: scale(0.9); }
 .fab svg { width: 32px; height: 32px; fill: currentColor; }
 
@@ -144,19 +96,30 @@ button,input,select{font:inherit;color:inherit}
 
 /* LAYOUT */
 .grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.main-col { display: flex; flex-direction: column; gap: 24px; }
 .ledger,.side{border-radius:24px;padding:24px}
 .side section+section{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
 h2{font-family:var(--f-display);font-size:22px;font-weight:700;margin:0 0 16px}
 
-/* LEDGER & PROVIDER ICONS */
+/* TIMELINE (Prossimi 30 Giorni) */
+.timeline { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 8px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.tl-item { background: var(--tint); border: 1px solid var(--line); border-radius: 16px; padding: 12px; min-width: 95px; text-align: center; flex-shrink: 0; scroll-snap-align: start; }
+.tl-item.today { border-color: var(--accent); background: var(--accent); color: var(--on-accent); box-shadow: 0 4px 12px rgba(52, 81, 209, 0.3); }
+.tl-item.today .tl-lbl { color: rgba(255,255,255,0.8); }
+.tl-lbl { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
+.tl-val { font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
+
+/* LEDGER */
 .group+.group{margin-top:28px}
 .group h3{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:16px;font-weight:600}
 .group h3 .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
 .group h3 .sub{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:500}
 .t-single{--c:var(--single)} .t-recurring{--c:var(--recurring)} .t-installment{--c:var(--rate)}
 .rows{list-style:none;margin:0;padding:0; display:grid; gap: 12px;}
-.row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:0 14px;padding:12px;background: var(--tint); border-radius: 16px; align-items: center;}
+.row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:0 14px;padding:12px;background: var(--tint); border-radius: 16px; align-items: center; transition: opacity 0.2s;}
+.row.paid { opacity: 0.45; }
 .day{width:40px;height:40px;border-radius:50%;background:var(--bg);color:var(--c);display:grid;place-items:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums; border: 1px solid var(--line);}
+.row.paid .day { background: transparent; border-color: transparent; }
 .what{min-width:0}
 .what strong{display:block;font-weight:600;overflow-wrap:anywhere; font-size: 15px;}
 .meta{color:var(--muted);font-size:13px; display:flex; align-items:center; flex-wrap:wrap; margin-top:2px;}
@@ -186,9 +149,6 @@ h2{font-family:var(--f-display);font-size:22px;font-weight:700;margin:0 0 16px}
 .bk-msg{margin:12px 0 0;min-height:1.4em;color:var(--muted);font-size:14px}
 .choice{margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--tint)}
 .choice[hidden]{display:none}
-details.paste{margin-top:12px}
-details.paste summary{cursor:pointer;color:var(--muted);font-size:14px}
-textarea{width:100%;min-height:96px;border:1px solid var(--line);background:var(--tint);border-radius:12px;padding:10px 12px;font:13px/1.4 ui-monospace,monospace;color:var(--ink);margin-top:8px}
 
 /* PROJECTION */
 .proj{width:100%;height:auto;display:block}
@@ -199,11 +159,14 @@ textarea{width:100%;min-height:96px;border:1px solid var(--line);background:var(
 .proj-legend span{display:flex;align-items:center;gap:6px}
 .proj-legend .dot{width:10px;height:10px;border-radius:50%}
 
-/* DIALOG MODALS */
-dialog{border:0;border-radius:28px;padding:0;width:calc(100% - 32px);max-width:460px;color:var(--ink); margin: auto;}
-dialog::backdrop{background:rgba(0,0,0,.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);}
-.form{padding:26px;display:grid;gap:18px}
-.form h2{margin:0; font-size: 22px;}
+/* DIALOG MODALS FIX PER IOS */
+dialog{border:0;border-radius:28px;padding:0;width:calc(100% - 32px);max-width:460px;color:var(--ink); margin: auto; max-height: 85dvh; overflow: hidden; background: transparent; box-shadow: none;}
+dialog::backdrop{background:rgba(0,0,0,.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);}
+.dialog-content { display: flex; flex-direction: column; max-height: 85dvh; background: var(--surface-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); box-shadow: 0 12px 40px var(--glass-shadow); border-radius: 28px;}
+.dialog-body { padding: 26px; overflow-y: auto; display: grid; gap: 18px; }
+.dialog-footer { padding: 16px 26px; border-top: 1px solid var(--line); background: var(--surface-glass); display: flex; justify-content: flex-end; gap: 12px; border-radius: 0 0 28px 28px; flex-shrink: 0;}
+
+.dialog-body h2{margin:0; font-size: 22px;}
 .seg{border:0;margin:0;padding:4px;display:grid;grid-template-columns:repeat(3,1fr);background:var(--line);border-radius:14px}
 .seg label{position:relative}
 .seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
@@ -218,10 +181,8 @@ dialog::backdrop{background:rgba(0,0,0,.5); backdrop-filter: blur(6px); -webkit-
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .err{color:var(--danger);font-weight:500;margin:0;min-height:1.4em; font-size: 14px;}
-.actions{display:flex;justify-content:flex-end;gap:12px; margin-top: 8px;}
-.actions .btn{padding: 12px 24px; font-size: 16px;}
+.dialog-footer .btn{padding: 12px 24px; font-size: 16px;}
 
-/* SETTINGS CATEGORY LIST */
 .cat-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
 .cat-list li { display:flex; justify-content:space-between; background:var(--bg); border: 1px solid var(--line); padding:10px 14px; border-radius:12px; align-items:center; font-size: 15px; font-weight:600; }
 
@@ -229,25 +190,18 @@ dialog::backdrop{background:rgba(0,0,0,.5); backdrop-filter: blur(6px); -webkit-
 #dlgWelcome.fullscreen {
   width: 100dvw; height: 100dvh; max-width: none; max-height: none;
   margin: 0; padding: 0; border-radius: 0; border: none;
-  background: var(--bg-gradient);
-  z-index: 9999;
+  background: var(--bg-gradient); z-index: 9999;
 }
-/* Assicura che il flexbox si attivi solo quando il dialog è aperto */
-dialog[open]#dlgWelcome.fullscreen {
-  display: flex; align-items: center; justify-content: center;
-}
-#dlgWelcome::backdrop {
-  background: var(--bg-gradient);
-}
-.welcome-card {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 24px; max-width: 400px; width: 100%; box-sizing: border-box;
-}
+dialog[open]#dlgWelcome.fullscreen { display: flex; align-items: center; justify-content: center; }
+#dlgWelcome::backdrop { background: var(--bg-gradient); }
+.welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 24px; max-width: 400px; width: 100%; box-sizing: border-box; }
 .welcome-logo { width:72px; height:72px; margin-bottom:20px; }
 .welcome-features { list-style:none; padding:0; margin:24px 0 32px; text-align:left; display:grid; gap:16px; font-size:16px; width: 100%; }
 .welcome-features li { display:flex; align-items:center; gap:12px; }
 .welcome-icon { font-size:24px; background:var(--tint); width:48px; height:48px; display:grid; place-items:center; border-radius:14px; flex-shrink: 0;}
-.welcome-input { text-align:center; font-size:20px; padding:16px; border-radius:16px; margin: 10px 0 32px; font-weight:700; width:100%; box-sizing: border-box; }
+/* FIX colore testo Setup Nome */
+.welcome-input { text-align:center; font-size:20px; padding:16px; border-radius:16px; margin: 10px 0 32px; font-weight:700; width:100%; box-sizing: border-box; background: #FFFFFF; color: #101B33; border: 1px solid rgba(0,0,0,0.1); }
+.welcome-input::placeholder { color: #888; font-weight: 500; }
 
 @media (max-width:820px){ .grid{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:480px){ .app{padding:16px 16px 100px} .ledger,.side{padding:20px} }
@@ -256,7 +210,7 @@ dialog[open]#dlgWelcome.fullscreen {
 </head>
 <body>
 
-<!-- ONBOARDING (Visibile solo al primo avvio) -->
+<!-- ONBOARDING -->
 <dialog id="dlgWelcome" class="fullscreen glass" aria-labelledby="welcomeTitle">
   <div class="welcome-card" id="slide1">
     <svg viewBox="0 0 40 40" class="welcome-logo" aria-hidden="true">
@@ -276,13 +230,12 @@ dialog[open]#dlgWelcome.fullscreen {
     </ul>
     
     <button type="button" class="btn" id="btnWelcomeNext" style="width:100%; padding:14px; font-size:16px;">Continua</button>
-    <button type="button" class="btn quiet" id="btnWelcomeSignIn" hidden style="width:100%; padding:14px; font-size:16px; margin-top:12px;">Ho già un account: accedi con Google</button>
   </div>
 
   <div class="welcome-card" id="slide2" hidden>
     <h2>Come ti chiami?</h2>
     <p style="color:var(--muted); margin-top:8px;">Personalizza la tua esperienza per sentirti a casa.</p>
-    <input type="text" id="welcomeName" placeholder="Il tuo nome" class="welcome-input" autocomplete="off">
+    <input type="text" id="welcomeName" placeholder="Es. Alessandro" class="welcome-input" autocomplete="off">
     <button type="button" class="btn" id="btnWelcomeStart" style="width:100%; padding:14px; font-size:16px;">Inizia ora</button>
   </div>
 </dialog>
@@ -307,13 +260,9 @@ dialog[open]#dlgWelcome.fullscreen {
 
   <header class="top">
     <nav class="month" aria-label="Scegli il mese">
-      <button class="round glass" id="prev" aria-label="Mese precedente">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </button>
+      <button class="round glass" id="prev" aria-label="Mese precedente"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <h1 id="monthLabel" aria-live="polite"></h1>
-      <button class="round glass" id="next" aria-label="Mese successivo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </button>
+      <button class="round glass" id="next" aria-label="Mese successivo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </nav>
     <button class="btn quiet glass" id="today" type="button" style="padding: 10px 16px;">Oggi</button>
   </header>
@@ -328,10 +277,17 @@ dialog[open]#dlgWelcome.fullscreen {
   </section>
 
   <div class="grid">
-    <section class="ledger glass" aria-labelledby="ledgerTitle">
-      <h2 id="ledgerTitle">Movimenti del mese</h2>
-      <div id="list"></div>
-    </section>
+    <div class="main-col">
+      <section class="glass" style="padding:20px 24px; border-radius:24px;" aria-labelledby="tlTitle">
+        <h2 id="tlTitle" style="font-size:18px;">Prossimi 30 giorni</h2>
+        <div class="timeline" id="timelineTrack"></div>
+      </section>
+
+      <section class="ledger glass" aria-labelledby="ledgerTitle">
+        <h2 id="ledgerTitle">Movimenti del mese</h2>
+        <div id="list"></div>
+      </section>
+    </div>
 
     <aside class="side glass">
       <section aria-labelledby="catsTitle">
@@ -351,18 +307,9 @@ dialog[open]#dlgWelcome.fullscreen {
           <span><i class="dot" style="background:var(--recurring)"></i>Ricorrenti</span>
         </div>
       </section>
-      <section aria-labelledby="cloudTitle">
-        <h2 id="cloudTitle">Sincronizzazione</h2>
-        <p class="meta" style="margin:0" id="cloudStatus">Accedi con Google per avere i dati su tutti i tuoi dispositivi.</p>
-        <div class="bk-actions">
-          <button class="btn" type="button" id="btnSignIn">Accedi con Google</button>
-          <button class="btn quiet" type="button" id="btnSignOut" hidden>Esci</button>
-        </div>
-        <p class="bk-msg" id="cloudMsg" role="status"></p>
-      </section>
       <section aria-labelledby="bkTitle">
         <h2 id="bkTitle">Gestione Dati</h2>
-        <p class="meta" style="margin:0">Salva e sincronizza i tuoi dati.</p>
+        <p class="meta" style="margin:0">Salva un backup offline sul dispositivo.</p>
         <div class="bk-actions">
           <button class="btn" type="button" id="bkSave">Esporta Dati</button>
           <button class="btn quiet" type="button" id="bkImport">Importa</button>
@@ -387,68 +334,68 @@ dialog[open]#dlgWelcome.fullscreen {
 </div>
 
 <!-- DIALOG INSERIMENTO VOCE -->
-<dialog id="dlg" class="glass" aria-labelledby="dlgTitle">
-  <form class="form" id="f" novalidate>
-    <h2 id="dlgTitle">Nuova voce</h2>
+<dialog id="dlg">
+  <form class="dialog-content" id="f" novalidate>
+    <div class="dialog-body">
+      <h2 id="dlgTitle">Nuova voce</h2>
 
-    <fieldset class="seg">
-      <legend class="sr">Tipo di voce</legend>
-      <label><input type="radio" name="type" value="single" checked><span>Singola</span></label>
-      <label><input type="radio" name="type" value="recurring"><span>Ricorrente</span></label>
-      <label><input type="radio" name="type" value="installment"><span>Rata</span></label>
-    </fieldset>
+      <fieldset class="seg">
+        <legend class="sr">Tipo di voce</legend>
+        <label><input type="radio" name="type" value="single" checked><span>Singola</span></label>
+        <label><input type="radio" name="type" value="recurring"><span>Ricorrente</span></label>
+        <label><input type="radio" name="type" value="installment"><span>Rata</span></label>
+      </fieldset>
 
-    <div class="field">
-      <label for="fName" id="lName">Descrizione</label>
-      <input id="fName" type="text" autocomplete="off" maxlength="80">
-    </div>
-
-    <div class="field" id="gProvider" hidden>
-      <label for="fProvider">Servizio</label>
-      <input id="fProvider" type="text" list="providers" autocomplete="off" maxlength="40" placeholder="Klarna, PayPal…">
-      <datalist id="providers">
-        <option value="Klarna"><option value="Cofidis"><option value="Scalapay"><option value="PayPal"><option value="Findomestic"><option value="Compass">
-      </datalist>
-    </div>
-
-    <div class="two">
       <div class="field">
-        <label for="fAmount" id="lAmount">Importo (€)</label>
-        <input id="fAmount" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0,00">
+        <label for="fName" id="lName">Descrizione</label>
+        <input id="fName" type="text" autocomplete="off" maxlength="80">
       </div>
-      <div class="field" id="gCount" hidden>
-        <label for="fCount">N. rate</label>
-        <input id="fCount" type="number" inputmode="numeric" step="1" min="1" max="120" value="3">
-      </div>
-      <div class="field" id="gDate">
-        <label for="fDate">Data</label>
-        <input id="fDate" type="date">
-      </div>
-    </div>
 
-    <div class="two" id="gStartRow" hidden>
-      <div class="field">
-        <label for="fStart" id="lStart">Inizio</label>
-        <input id="fStart" type="month" placeholder="2026-10" pattern="\d{4}-\d{2}">
+      <div class="field" id="gProvider" hidden>
+        <label for="fProvider">Servizio</label>
+        <select id="fProvider"></select>
       </div>
-      <div class="field">
-        <label for="fDay">Giorno addebito</label>
-        <input id="fDay" type="number" inputmode="numeric" min="1" max="31" step="1" value="1">
+
+      <div class="two">
+        <div class="field">
+          <label for="fAmount" id="lAmount">Importo (€)</label>
+          <input id="fAmount" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0,00">
+        </div>
+        <div class="field" id="gCount" hidden>
+          <label for="fCount">N. rate</label>
+          <input id="fCount" type="number" inputmode="numeric" step="1" min="1" max="120" value="3">
+        </div>
+        <div class="field" id="gDate">
+          <label for="fDate">Data</label>
+          <input id="fDate" type="date">
+        </div>
       </div>
-    </div>
 
-    <div class="field" id="gEnd" hidden>
-      <label for="fEnd">Fino al (facoltativo)</label>
-      <input id="fEnd" type="month" placeholder="2027-06" pattern="\d{4}-\d{2}">
-    </div>
+      <div class="two" id="gStartRow" hidden>
+        <div class="field">
+          <label for="fStart" id="lStart">Inizio</label>
+          <input id="fStart" type="month" placeholder="2026-10" pattern="\d{4}-\d{2}">
+        </div>
+        <div class="field">
+          <label for="fDay">Giorno addebito</label>
+          <input id="fDay" type="number" inputmode="numeric" min="1" max="31" step="1" value="1">
+        </div>
+      </div>
 
-    <div class="field" id="gCat">
-      <label for="fCat">Categoria</label>
-      <select id="fCat"></select>
-    </div>
+      <div class="field" id="gEnd" hidden>
+        <label for="fEnd">Fino al (facoltativo)</label>
+        <input id="fEnd" type="month" placeholder="2027-06" pattern="\d{4}-\d{2}">
+      </div>
 
-    <p class="err" id="err" role="alert"></p>
-    <div class="actions">
+      <div class="field" id="gCat">
+        <label for="fCat">Categoria</label>
+        <select id="fCat"></select>
+      </div>
+
+      <p class="err" id="err" role="alert"></p>
+    </div>
+    
+    <div class="dialog-footer">
       <button class="btn quiet" type="button" id="cancel">Annulla</button>
       <button class="btn" type="submit" id="saveBtn">Salva</button>
     </div>
@@ -456,38 +403,61 @@ dialog[open]#dlgWelcome.fullscreen {
 </dialog>
 
 <!-- DIALOG IMPOSTAZIONI -->
-<dialog id="dlgSet" class="glass" aria-labelledby="dlgSetTitle">
-  <form class="form" id="fSet" novalidate>
-    <h2 id="dlgSetTitle">Impostazioni</h2>
+<dialog id="dlgSet">
+  <form class="dialog-content" id="fSet" novalidate>
+    <div class="dialog-body">
+      <h2 id="dlgSetTitle">Impostazioni</h2>
+      
+      <div class="field">
+        <label for="setName">Il tuo Nome</label>
+        <input id="setName" type="text" placeholder="Es. Alessandro" maxlength="30">
+        <p class="meta" id="setNameNote" hidden style="margin:0">Il nome arriva dal tuo account Google.</p>
+      </div>
+
+      <div class="field" style="margin-top: 8px;">
+        <label>Le tue Categorie</label>
+        <ul id="setCatList" class="cat-list"></ul>
+        <div style="display:flex; gap:8px; margin-top:8px;">
+           <input type="text" id="newCatInput" placeholder="Nuova categoria..." style="flex:1;">
+           <button type="button" class="btn quiet" id="btnAddCat" style="padding: 10px 14px; font-size:14px;">Aggiungi</button>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top: 8px;">
+        <label>Servizi a rate</label>
+        <ul id="setProvList" class="cat-list"></ul>
+        <div style="display:flex; gap:8px; margin-top:8px;">
+           <input type="text" id="newProvInput" placeholder="Klarna, PayPal..." style="flex:1;">
+           <button type="button" class="btn quiet" id="btnAddProv" style="padding: 10px 14px; font-size:14px;">Aggiungi</button>
+        </div>
+      </div>
+
+      <div class="three" style="margin-top: 12px;">
+        <div class="field">
+          <label style="font-size:12px; text-align:center;">Singole</label>
+          <input type="color" id="setColS">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; text-align:center;">Ricorrenti</label>
+          <input type="color" id="setColR">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; text-align:center;">Rate</label>
+          <input type="color" id="setColI">
+        </div>
+      </div>
+
+      <!-- GOOGLE SYNC -->
+      <div class="field" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);">
+        <label>Sincronizzazione Cloud</label>
+        <p class="meta" id="cloudStatus" style="margin-bottom:8px;">Accedi con Google per avere i dati su tutti i tuoi dispositivi.</p>
+        <button class="btn google" type="button" id="btnSignIn" style="width:100%; justify-content:center; padding:12px;">Accedi con Google</button>
+        <button class="btn quiet" type="button" id="btnSignOut" hidden style="width:100%; color:var(--danger); border-color:var(--danger);">Esci dall'account</button>
+        <p class="err" id="cloudMsg" style="margin-top:4px;"></p>
+      </div>
+    </div>
     
-    <div class="field">
-      <label for="setName">Il tuo Nome</label>
-      <input id="setName" type="text" placeholder="Es. Alessandro" maxlength="30">
-      <p class="meta" id="setNameNote" hidden style="margin:0">Il nome arriva dal tuo account Google.</p>
-    </div>
-
-    <div class="field" style="margin-top: 8px;">
-      <label>Le tue Categorie</label>
-      <ul id="setCatList" class="cat-list"></ul>
-      <button class="btn quiet" type="button" id="btnAddCat" style="padding: 10px; font-size: 14px; margin-top: 8px; width:100%; border-style:dashed;">+ Aggiungi Categoria</button>
-    </div>
-
-    <div class="three" style="margin-top: 12px;">
-      <div class="field">
-        <label style="font-size:12px; text-align:center;">Singole</label>
-        <input type="color" id="setColS">
-      </div>
-      <div class="field">
-        <label style="font-size:12px; text-align:center;">Ricorrenti</label>
-        <input type="color" id="setColR">
-      </div>
-      <div class="field">
-        <label style="font-size:12px; text-align:center;">Rate</label>
-        <input type="color" id="setColI">
-      </div>
-    </div>
-
-    <div class="actions" style="margin-top: 16px;">
+    <div class="dialog-footer">
       <button class="btn quiet" type="button" id="closeSet">Chiudi</button>
       <button class="btn" type="submit">Salva</button>
     </div>
@@ -506,13 +476,16 @@ dialog[open]#dlgWelcome.fullscreen {
   function uid(){ return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
 
   // --- IMPOSTAZIONI UTENTE ---
+  var defaultProvs = ['Klarna', 'PayPal', 'Scalapay', 'Cofidis', 'Compass', 'Findomestic'];
   var appSettings = {
     name: '',
     cats: ['Casa', 'Cibo', 'Trasporti', 'Abbonamenti', 'Salute', 'Svago', 'Shopping', 'Altro'],
+    providers: defaultProvs.slice(),
     cols: { s: '#3451D1', r: '#1B8F80', i: '#E8582A' }
   };
   var tempCats = [];
-  var account = { name: '', photo: '', email: '' };   // dati dell'account Google, valgono solo a sessione attiva
+  var tempProvs = [];
+  var account = { name: '', photo: '', email: '' };   
   var photoFailed = '';
   function shownName(){ return account.name || appSettings.name || ''; }
   $('avatarImg').addEventListener('error', function(){ photoFailed = account.photo; applySettings(); });
@@ -521,6 +494,7 @@ dialog[open]#dlgWelcome.fullscreen {
     try {
       var r = localStorage.getItem(SET_KEY);
       if(r) appSettings = Object.assign(appSettings, JSON.parse(r));
+      if(!appSettings.providers) appSettings.providers = defaultProvs.slice();
     } catch(e) {}
     applySettings();
   }
@@ -544,7 +518,6 @@ dialog[open]#dlgWelcome.fullscreen {
     root.style.setProperty('--single', appSettings.cols.s);
     root.style.setProperty('--recurring', appSettings.cols.r);
     root.style.setProperty('--rate', appSettings.cols.i);
-    // NOTA: --accent rimane intoccato per mantenere l'identità dell'app
     
     var shown = shownName();
     var parts = shown.split(/\s+/).filter(Boolean);
@@ -560,13 +533,22 @@ dialog[open]#dlgWelcome.fullscreen {
     }
 
     var catSelect = $('fCat');
-    var currentVal = catSelect.value;
-    catSelect.innerHTML = appSettings.cats.map(function(c){return '<option>'+esc(c)+'</option>'}).join('');
-    if(appSettings.cats.indexOf(currentVal) >= 0) catSelect.value = currentVal;
-    else if(appSettings.cats.length) catSelect.value = appSettings.cats[0];
+    if(catSelect) {
+      var currentCat = catSelect.value;
+      catSelect.innerHTML = appSettings.cats.map(function(c){return '<option>'+esc(c)+'</option>'}).join('');
+      if(appSettings.cats.indexOf(currentCat) >= 0) catSelect.value = currentCat;
+      else if(appSettings.cats.length) catSelect.value = appSettings.cats[0];
+    }
+    var provSelect = $('fProvider');
+    if(provSelect) {
+      var currentProv = provSelect.value;
+      provSelect.innerHTML = appSettings.providers.map(function(c){return '<option>'+esc(c)+'</option>'}).join('');
+      if(appSettings.providers.indexOf(currentProv) >= 0) provSelect.value = currentProv;
+      else if(appSettings.providers.length) provSelect.value = appSettings.providers[0];
+    }
   }
 
-  // --- ONBOARDING (Primo avvio) ---
+  // --- ONBOARDING ---
   var hasOnboarded = localStorage.getItem('alestore-onboarded');
   if(!hasOnboarded) {
     if(typeof $('dlgWelcome').showModal === 'function') $('dlgWelcome').showModal();
@@ -587,7 +569,6 @@ dialog[open]#dlgWelcome.fullscreen {
     else $('dlgWelcome').removeAttribute('open');
   });
 
-  // --- PROVIDER ICONS HELPER ---
   function getProviderIcon(name) {
     var n = (name||'').toLowerCase();
     if(n.includes('klarna')) return '<span class="prov-icon" style="background:#FFA8C5; color:#0A0A0A;">K</span>';
@@ -613,18 +594,13 @@ dialog[open]#dlgWelcome.fullscreen {
     } catch(e) { items = []; }
   };
 
-  function save(){
-    persistLocal();
-    if(cloud.onItems) cloud.onItems(items);
-  }
+  function save(){ persistLocal(); if(cloud.onItems) cloud.onItems(items); }
   function persistLocal(){
     try {
       var jsonStr = JSON.stringify(items);
       if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.saveData) {
         window.webkit.messageHandlers.saveData.postMessage(jsonStr);
-      } else {
-        localStorage.setItem(KEY, jsonStr);
-      }
+      } else { localStorage.setItem(KEY, jsonStr); }
     } catch(e) {}
   }
   
@@ -635,10 +611,7 @@ dialog[open]#dlgWelcome.fullscreen {
       var a = JSON.parse(r); return Array.isArray(a)?a:[];
     } catch(e) { return []; }
   }
-  
-  if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.saveData) {
-    items = loadFallback();
-  }
+  if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.saveData) items = loadFallback();
   
   // --- CORE APP ---
   var now=new Date();
@@ -684,40 +657,68 @@ dialog[open]#dlgWelcome.fullscreen {
     $('total').textContent=fmt(total);
 
     var pct=function(v){ return total>0?(v/total*100):0; };
-    $('bar').innerHTML=
-      '<span class="s" style="width:'+pct(sums.single)+'%"></span>'+
-      '<span class="r" style="width:'+pct(sums.recurring)+'%"></span>'+
-      '<span class="i" style="width:'+pct(sums.installment)+'%"></span>';
-    $('legend').innerHTML=
-      '<li><i class="dot" style="background:var(--single)"></i>Singole <b>'+fmt(sums.single)+'</b></li>'+
-      '<li><i class="dot" style="background:var(--recurring)"></i>Ricorrenti <b>'+fmt(sums.recurring)+'</b></li>'+
-      '<li><i class="dot" style="background:var(--rate)"></i>Rate <b>'+fmt(sums.installment)+'</b></li>';
+    $('bar').innerHTML='<span class="s" style="width:'+pct(sums.single)+'%"></span><span class="r" style="width:'+pct(sums.recurring)+'%"></span><span class="i" style="width:'+pct(sums.installment)+'%"></span>';
+    $('legend').innerHTML='<li><i class="dot" style="background:var(--single)"></i>Singole <b>'+fmt(sums.single)+'</b></li><li><i class="dot" style="background:var(--recurring)"></i>Ricorrenti <b>'+fmt(sums.recurring)+'</b></li><li><i class="dot" style="background:var(--rate)"></i>Rate <b>'+fmt(sums.installment)+'</b></li>';
 
     var st=$('status');
     if(view===todayIdx){
       var d=now.getDate(), paid=0;
       o.forEach(function(x){ if(x.day<=d) paid+=x.it.amount; });
       st.innerHTML='Già addebitato <b>'+fmt(paid)+'</b> &middot; In arrivo <b>'+fmt(Math.max(0,total-paid))+'</b>';
-    }else if(view<todayIdx){
-      st.textContent='Mese concluso.';
-    }else{
-      st.textContent='Previsione per questo mese futuro.';
-    }
+    }else if(view<todayIdx){ st.textContent='Mese concluso.'; }else{ st.textContent='Previsione per questo mese futuro.'; }
+  }
+
+  function renderTimeline(){
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var end = new Date(today.getTime() + 30*86400000);
+    var tl = {};
+    
+    // Controlliamo il mese corrente e il successivo
+    [todayIdx, todayIdx + 1].forEach(function(m) {
+       occ(m).forEach(function(x) {
+          var d = new Date(Math.floor(m/12), m%12, x.day);
+          if(d >= today && d <= end) {
+             var dStr = d.getTime();
+             if(!tl[dStr]) tl[dStr] = { date: d, amt: 0, items: [] };
+             tl[dStr].amt += x.it.amount;
+             tl[dStr].items.push(x.it);
+          }
+       });
+    });
+    
+    var keys = Object.keys(tl).sort(function(a,b){ return a-b; });
+    var html = keys.map(function(k){
+       var node = tl[k];
+       var dName = node.date.getDate() + ' ' + mLabel(node.date.getFullYear()*12+node.date.getMonth(), {month:'short'});
+       var isToday = node.date.getTime() === today.getTime();
+       var cls = isToday ? 'tl-item today' : 'tl-item';
+       return '<div class="'+cls+'"><div class="tl-lbl">'+(isToday?'Oggi':dName)+'</div><div class="tl-val">'+fmt(node.amt)+'</div></div>';
+    }).join('');
+    
+    $('timelineTrack').innerHTML = html || '<div class="empty" style="padding:10px 0;">Nessuna uscita prevista nei prossimi 30 giorni.</div>';
   }
 
   function groupHtml(type,title,list){
     if(!list.length) return '';
     list.sort(function(a,b){ return a.day-b.day; });
     var sub=0; list.forEach(function(x){ sub+=x.it.amount; });
+    
     var rows=list.map(function(x){
       var it=x.it, meta='';
       if(type==='installment') meta= getProviderIcon(it.provider) + esc(it.provider||'Rata') + ' &middot; rata ' + x.n + ' di ' + it.count;
       else if(type==='recurring') meta=esc(it.category||'Altro')+' &middot; mensile';
       else meta=esc(it.category||'Altro');
       
+      // Controllo se il pagamento è già passato (addebito evaso)
+      var isPaid = false;
+      if(view < todayIdx) isPaid = true;
+      else if(view === todayIdx && x.day <= now.getDate()) isPaid = true;
+      
+      var rowCls = isPaid ? 'row paid' : 'row';
       var delLabel=(pendingDelete===it.id)?'Sicuro?':'Elimina';
       var delCls=(pendingDelete===it.id)?'link danger':'link';
-      return '<li class="row"><span class="day" title="Giorno '+x.day+'">'+x.day+'</span>'+
+      
+      return '<li class="'+rowCls+'"><span class="day" title="Giorno '+x.day+'">'+x.day+'</span>'+
         '<div class="what"><strong>'+esc(it.name)+'</strong><span class="meta">'+meta+'</span></div>'+
         '<span class="amt">'+fmt(it.amount)+'</span>'+
         '<div class="acts"><button class="link" data-act="edit" data-id="'+it.id+'">Modifica</button>'+
@@ -806,7 +807,7 @@ dialog[open]#dlgWelcome.fullscreen {
 
   function render(){
     var o=occ(view);
-    renderHero(o); renderCats(o); renderList(o); renderPlans(); renderProj();
+    renderHero(o); renderTimeline(); renderCats(o); renderList(o); renderPlans(); renderProj();
   }
 
   // --- GESTIONE MODALE VOCE ---
@@ -842,7 +843,6 @@ dialog[open]#dlgWelcome.fullscreen {
     var t=it?it.type:'single';
     f.querySelector('input[name="type"][value="'+t+'"]').checked=true;
     $('fName').value=it?it.name:'';
-    $('fProvider').value=it&&it.provider?it.provider:'';
     $('fAmount').value=it?it.amount:'';
     $('fCount').value=it&&it.count?it.count:3;
     $('fDate').value=it&&it.date?it.date:defaultDate();
@@ -850,18 +850,17 @@ dialog[open]#dlgWelcome.fullscreen {
     $('fDay').value=it&&it.day?it.day:now.getDate();
     $('fEnd').value=it&&it.end?it.end:'';
     
-    // Assicurati che la categoria esista, sennò fallback
     if(it && it.category) {
        var opt = Array.from($('fCat').options).find(function(o){return o.value===it.category});
-       if(!opt) {
-          var newOpt = document.createElement('option');
-          newOpt.text = it.category;
-          $('fCat').add(newOpt);
-       }
+       if(!opt) { var newOpt = document.createElement('option'); newOpt.text = it.category; $('fCat').add(newOpt); }
        $('fCat').value = it.category;
-    } else {
-       $('fCat').selectedIndex = 0;
-    }
+    } else { $('fCat').selectedIndex = 0; }
+    
+    if(it && it.provider) {
+       var optP = Array.from($('fProvider').options).find(function(o){return o.value===it.provider});
+       if(!optP) { var newOptP = document.createElement('option'); newOptP.text = it.provider; $('fProvider').add(newOptP); }
+       $('fProvider').value = it.provider;
+    } else { $('fProvider').selectedIndex = 0; }
     
     syncType();
     if(typeof dlg.showModal==='function') dlg.showModal(); else dlg.setAttribute('open','');
@@ -896,7 +895,7 @@ dialog[open]#dlgWelcome.fullscreen {
         if(!err && t==='installment'){
           var c=parseInt($('fCount').value,10);
           if(!(c>=1 && c<=120)) err='Numero rate tra 1 e 120.';
-          d.count=c; d.provider=$('fProvider').value.trim(); d.category=$('fCat').value;
+          d.count=c; d.provider=$('fProvider').value; d.category=$('fCat').value;
         }
       }
     }
@@ -907,9 +906,7 @@ dialog[open]#dlgWelcome.fullscreen {
     save(); closeDlg(); render();
   });
   $('cancel').addEventListener('click',closeDlg);
-  dlg.addEventListener('click',function(e){ if(e.target===dlg) closeDlg(); });
 
-  // Eventi app
   $('add').addEventListener('click',function(){ openDlg(null); });
   $('prev').addEventListener('click',function(){ view--; pendingDelete=null; render(); });
   $('next').addEventListener('click',function(){ view++; pendingDelete=null; render(); });
@@ -935,28 +932,21 @@ dialog[open]#dlgWelcome.fullscreen {
   // --- MODALE IMPOSTAZIONI (Profilo) ---
   var dlgSet=$('dlgSet'), fSet=$('fSet');
   
-  function renderSettingsCats() {
-    var ul = $('setCatList');
-    if(!tempCats.length) {
-      ul.innerHTML = '<li><span style="color:var(--muted)">Nessuna categoria</span></li>';
-      return;
-    }
-    ul.innerHTML = tempCats.map(function(c, i){
-      return '<li><span>'+esc(c)+'</span><button type="button" class="link danger" onclick="window.removeCat('+i+')">Rimuovi</button></li>';
-    }).join('');
+  function renderSettingsLists() {
+    $('setCatList').innerHTML = tempCats.map(function(c, i){ return '<li><span>'+esc(c)+'</span><button type="button" class="link danger" onclick="window.removeCat('+i+')">Rimuovi</button></li>'; }).join('') || '<li><span class="meta">Nessuna categoria</span></li>';
+    $('setProvList').innerHTML = tempProvs.map(function(c, i){ return '<li><span>'+esc(c)+'</span><button type="button" class="link danger" onclick="window.removeProv('+i+')">Rimuovi</button></li>'; }).join('') || '<li><span class="meta">Nessun servizio</span></li>';
   }
   
-  window.removeCat = function(idx) {
-    tempCats.splice(idx, 1);
-    renderSettingsCats();
-  };
+  window.removeCat = function(idx) { tempCats.splice(idx, 1); renderSettingsLists(); };
+  window.removeProv = function(idx) { tempProvs.splice(idx, 1); renderSettingsLists(); };
   
   $('btnAddCat').addEventListener('click', function() {
-    var c = prompt("Nome della nuova categoria:");
-    if(c && c.trim()) {
-      tempCats.push(c.trim());
-      renderSettingsCats();
-    }
+    var v = $('newCatInput').value.trim();
+    if(v) { tempCats.push(v); $('newCatInput').value=''; renderSettingsLists(); }
+  });
+  $('btnAddProv').addEventListener('click', function() {
+    var v = $('newProvInput').value.trim();
+    if(v) { tempProvs.push(v); $('newProvInput').value=''; renderSettingsLists(); }
   });
 
   $('btnSettings').addEventListener('click', function(){
@@ -968,7 +958,8 @@ dialog[open]#dlgWelcome.fullscreen {
     $('setColR').value = appSettings.cols.r;
     $('setColI').value = appSettings.cols.i;
     tempCats = appSettings.cats.slice();
-    renderSettingsCats();
+    tempProvs = appSettings.providers.slice();
+    renderSettingsLists();
     if(typeof dlgSet.showModal==='function') dlgSet.showModal(); else dlgSet.setAttribute('open','');
   });
   
@@ -976,13 +967,14 @@ dialog[open]#dlgWelcome.fullscreen {
     if(typeof dlgSet.close==='function') dlgSet.close(); else dlgSet.removeAttribute('open');
   }
   $('closeSet').addEventListener('click', closeSettings);
-  dlgSet.addEventListener('click', function(e){ if(e.target===dlgSet) closeSettings(); });
 
   fSet.addEventListener('submit', function(e){
     e.preventDefault();
     if(!$('setName').disabled) appSettings.name = $('setName').value.trim() || 'Utente';
     appSettings.cats = tempCats.slice();
-    if(appSettings.cats.length === 0) appSettings.cats = ['Altro']; // Evita array vuoto
+    if(appSettings.cats.length === 0) appSettings.cats = ['Altro']; 
+    appSettings.providers = tempProvs.slice();
+    if(appSettings.providers.length === 0) appSettings.providers = ['Klarna']; 
     appSettings.cols.s = $('setColS').value;
     appSettings.cols.r = $('setColR').value;
     appSettings.cols.i = $('setColI').value;
@@ -993,25 +985,13 @@ dialog[open]#dlgWelcome.fullscreen {
 
   // --- BACKUP E IMPORTAZIONE ---
   function msg(t){ $('bkMsg').textContent=t; }
-  function backupJson(){
-    return JSON.stringify({app:'spese-rate',version:1,exportedAt:new Date().toISOString(),items:items},null,2);
-  }
+  function backupJson(){ return JSON.stringify({app:'spese-rate',version:1,exportedAt:new Date().toISOString(),items:items},null,2); }
   
   $('bkSave').addEventListener('click',function(){
     var json=backupJson();
     var name='spese-rate-'+defaultDateToday()+'.json';
-    
-    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.exportBackup) {
-      window.webkit.messageHandlers.exportBackup.postMessage({ filename: name, data: json });
-      msg('Menu di esportazione aperto.');
-      return;
-    }
-    
-    // Web/Electron fallback
-    var a=document.createElement('a');
-    a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json);
-    a.download=name; a.click();
-    msg('Backup scaricato ('+items.length+' voci).');
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.exportBackup) { window.webkit.messageHandlers.exportBackup.postMessage({ filename: name, data: json }); msg('Menu di esportazione aperto.'); return; }
+    var a=document.createElement('a'); a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json); a.download=name; a.click(); msg('Backup scaricato ('+items.length+' voci).');
   });
 
   function clean(raw){
@@ -1031,8 +1011,7 @@ dialog[open]#dlgWelcome.fullscreen {
         if(raw.end && (typeof raw.end!=='string' || !ym.test(raw.end))) return null;
         o.end=raw.end||'';
       }else{
-        var c=parseInt(raw.count,10);
-        if(!(c>=1 && c<=120)) return null;
+        var c=parseInt(raw.count,10); if(!(c>=1 && c<=120)) return null;
         o.count=c; o.provider=typeof raw.provider==='string'?raw.provider.trim().slice(0,40):'';
       }
     }
@@ -1048,89 +1027,54 @@ dialog[open]#dlgWelcome.fullscreen {
     var ok=[], bad=0;
     list.forEach(function(r){ var c=clean(r); if(c) ok.push(c); else bad++; });
     if(!ok.length){ msg('Nessuna voce valida.'); return; }
-    staged=ok;
-    $('choiceText').textContent='Trovate '+ok.length+' voci valide. Cosa vuoi fare?';
-    $('choice').hidden=false; msg('');
+    staged=ok; $('choiceText').textContent='Trovate '+ok.length+' voci valide. Cosa vuoi fare?'; $('choice').hidden=false; msg('');
   }
-  function finish(m){
-    staged=null; $('choice').hidden=true;
-    pendingDelete=null; save(); render(); msg(m);
-  }
-
-  function defaultDateToday(){
-    return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
-  }
+  function finish(m){ staged=null; $('choice').hidden=true; pendingDelete=null; save(); render(); msg(m); }
+  function defaultDateToday(){ return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0'); }
+  
   $('bkImport').addEventListener('click',function(){ $('bkFile').click(); });
   $('bkFile').addEventListener('change',function(){
     var file=this.files && this.files[0]; if(!file) return;
-    var r=new FileReader();
-    r.onload=function(){ stageImport(String(r.result)); };
-    r.readAsText(file); this.value='';
+    var r=new FileReader(); r.onload=function(){ stageImport(String(r.result)); }; r.readAsText(file); this.value='';
   });
   $('bkMerge').addEventListener('click',function(){
     if(!staged) return;
     var byId={}; items.forEach(function(x){ byId[x.id]=x; }); staged.forEach(function(x){ byId[x.id]=x; });
-    items=Object.keys(byId).map(function(k){ return byId[k]; });
-    finish('Backup unito ('+items.length+' voci).');
+    items=Object.keys(byId).map(function(k){ return byId[k]; }); finish('Backup unito ('+items.length+' voci).');
   });
   $('bkReplace').addEventListener('click',function(){
-    if(!staged) return; items=staged.slice();
-    finish('Dati sostituiti ('+items.length+' voci).');
+    if(!staged) return; items=staged.slice(); finish('Dati sostituiti ('+items.length+' voci).');
   });
   $('bkCancel').addEventListener('click',function(){ staged=null; $('choice').hidden=true; });
 
-  // --- PONTE VERSO IL CLOUD (usato dal modulo Firebase) ---
+  // --- PONTE VERSO IL CLOUD ---
   Object.assign(cloud, {
     setAccount: function(acc){
-      acc = acc || {};
-      account = { name: acc.name || '', photo: acc.photo || '', email: acc.email || '' };
-      if(account.name){
-        // con l'accesso Google il nome è già noto: salto la schermata di benvenuto
-        try{ localStorage.setItem('alestore-onboarded','true'); }catch(e){}
-        var w = $('dlgWelcome');
-        if(w.open){ if(typeof w.close==='function') w.close(); else w.removeAttribute('open'); }
-      }
+      acc = acc || {}; account = { name: acc.name || '', photo: acc.photo || '', email: acc.email || '' };
       applySettings();
     },
     getItems: function(){ return items; },
     getSettings: function(){ return appSettings; },
-    setItemsFromCloud: function(list){
-      items = Array.isArray(list) ? list : [];
-      pendingDelete = null;
-      persistLocal();
-      render();
-    },
+    setItemsFromCloud: function(list){ items = Array.isArray(list) ? list : []; pendingDelete = null; persistLocal(); render(); },
     setSettingsFromCloud: function(s){
       if(!s || typeof s !== 'object') return;
       appSettings = Object.assign({}, appSettings, s);
       appSettings.cols = Object.assign({ s:'#3451D1', r:'#1B8F80', i:'#E8582A' }, appSettings.cols);
       if(!Array.isArray(appSettings.cats) || !appSettings.cats.length) appSettings.cats = ['Altro'];
-      saveSettingsCore();
-      if(appSettings.name){
-        try{ localStorage.setItem('alestore-onboarded','true'); }catch(e){}
-        var w = $('dlgWelcome');
-        if(w.open){ if(typeof w.close==='function') w.close(); else w.removeAttribute('open'); }
-      }
-      render();
+      if(!Array.isArray(appSettings.providers) || !appSettings.providers.length) appSettings.providers = defaultProvs.slice();
+      saveSettingsCore(); render();
     },
     clearLocal: function(){
       items = [];
       try{ localStorage.removeItem(KEY); localStorage.removeItem(SET_KEY); localStorage.removeItem('alestore-onboarded'); }catch(e){}
       account = { name: '', photo: '', email: '' }; photoFailed = '';
-      appSettings = {
-        name: '',
-        cats: ['Casa', 'Cibo', 'Trasporti', 'Abbonamenti', 'Salute', 'Svago', 'Shopping', 'Altro'],
-        cols: { s: '#3451D1', r: '#1B8F80', i: '#E8582A' }
-      };
-      applySettings();
-      render();
+      appSettings = { name: '', cats: ['Casa', 'Cibo', 'Trasporti', 'Abbonamenti', 'Salute', 'Svago', 'Shopping', 'Altro'], providers: defaultProvs.slice(), cols: { s: '#3451D1', r: '#1B8F80', i: '#E8582A' } };
+      applySettings(); render();
     }
   });
   window.alestore = cloud;
 
-  function nativeHandler(name){
-    return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[name];
-  }
+  function nativeHandler(name){ return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[name]; }
   function startSignIn(){
     if(NATIVE){
       var h = nativeHandler('authAction');
@@ -1138,36 +1082,28 @@ dialog[open]#dlgWelcome.fullscreen {
       else $('cloudMsg').textContent = 'Accesso non disponibile in questa versione.';
       return;
     }
-    if(cloud.signIn) cloud.signIn();
-    else $('cloudMsg').textContent = 'Sincronizzazione non disponibile: controlla la connessione e ricarica la pagina.';
+    if(cloud.signIn) { cloud.signIn(); if(typeof $('dlgSet').close==='function') $('dlgSet').close(); else $('dlgSet').removeAttribute('open'); }
+    else $('cloudMsg').textContent = 'Sincronizzazione non disponibile: controlla la connessione e ricarica.';
   }
+  
   $('btnSignIn').addEventListener('click', startSignIn);
   $('btnSignOut').addEventListener('click', function(){
     if(NATIVE){ var h = nativeHandler('authAction'); if(h) h.postMessage({ action: 'signOut' }); return; }
     if(cloud.signOut) cloud.signOut();
   });
 
-  // App nativa (iOS): login Google e Firestore li gestisce Swift, la pagina riceve gli aggiornamenti
   if(NATIVE){
-    $('btnWelcomeSignIn').hidden = false;
-    $('btnWelcomeSignIn').addEventListener('click', startSignIn);
-    window.receiveSettingsFromSwift = function(json){
-      try{ cloud.setSettingsFromCloud(JSON.parse(json)); }catch(e){}
-    };
+    window.receiveSettingsFromSwift = function(json){ try{ cloud.setSettingsFromCloud(JSON.parse(json)); }catch(e){} };
     window.receiveAuthState = function(st){
-      st = st || {};
-      var on = !!st.signedIn;
-      $('btnSignIn').hidden = on; $('btnSignOut').hidden = !on; $('btnWelcomeSignIn').hidden = on;
-      $('cloudStatus').textContent = on
-        ? 'Connesso come ' + (st.email || 'utente') + (st.status ? ' \u00b7 ' + st.status : '')
-        : 'Accedi con Google per avere i dati su tutti i tuoi dispositivi.';
+      st = st || {}; var on = !!st.signedIn;
+      $('btnSignIn').hidden = on; $('btnSignOut').hidden = !on;
+      $('cloudStatus').textContent = on ? 'Connesso come ' + (st.email || 'utente') + (st.status ? ' \u00b7 ' + st.status : '') : 'Accedi con Google per avere i dati su tutti i tuoi dispositivi.';
       $('cloudMsg').textContent = st.message || '';
       cloud.setAccount(on ? { name: st.displayName, photo: st.photoURL, email: st.email } : null);
       if(st.cleared) cloud.clearLocal();
     };
   }
 
-  // Inizializza Settings & UI
   loadSettingsLocally();
   render();
 
@@ -1182,7 +1118,6 @@ const [{ initializeApp }, { getAuth, GoogleAuthProvider, signInWithPopup, signIn
   import("https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js"),
 ]);
 
-// Configurazione del progetto Firebase (la apiKey web non è un segreto: la sicurezza sta nelle regole di Firestore)
 const firebaseConfig = {
   apiKey: "AIzaSyDK_H3_IVBoD7Wcv1gBQUjgT0IR3XZx_Ic",
   authDomain: "alestorecontability.firebaseapp.com",
@@ -1196,7 +1131,7 @@ const firebaseConfig = {
 const A = window.alestore;
 const $ = (id) => document.getElementById(id);
 const statusEl = $('cloudStatus'), msgEl = $('cloudMsg');
-const inBtn = $('btnSignIn'), outBtn = $('btnSignOut'), wBtn = $('btnWelcomeSignIn');
+const inBtn = $('btnSignIn'), outBtn = $('btnSignOut');
 const IDLE_TEXT = 'Accedi con Google per avere i dati su tutti i tuoi dispositivi.';
 const say = (t) => { msgEl.textContent = t || ''; };
 const stable = (o) => JSON.stringify(o, Object.keys(o).sort());
@@ -1205,48 +1140,38 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 let db;
 try {
-  // cache su disco: l'app funziona anche offline e si risincronizza da sola
   db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
-} catch (e) {
-  db = getFirestore(app);
-}
+} catch (e) { db = getFirestore(app); }
 const provider = new GoogleAuthProvider();
 
 let user = null, unsubItems = null, unsubSettings = null;
-let remote = new Map();   // id -> ultima versione nota nel cloud (per mandare solo le differenze)
+let remote = new Map();
 
 const itemsCol = () => collection(db, 'users', user.uid, 'items');
 const settingsRef = () => doc(db, 'users', user.uid, 'meta', 'settings');
 
-function renderStatus(state) {
-  statusEl.textContent = 'Connesso come ' + (user.email || user.displayName || 'utente') + (state ? ' · ' + state : '');
-}
+function renderStatus(state) { statusEl.textContent = 'Connesso come ' + (user.email || user.displayName || 'utente') + (state ? ' · ' + state : ''); }
 
 async function pushItems(list) {
   if (!user) return;
-  const col = itemsCol();
-  const ops = [];
-  const ids = new Set();
+  const col = itemsCol(); const ops = []; const ids = new Set();
   for (const it of list) {
-    ids.add(it.id);
-    const s = stable(it);
+    ids.add(it.id); const s = stable(it);
     if (remote.get(it.id) !== s) { ops.push((b) => b.set(doc(col, it.id), it)); remote.set(it.id, s); }
   }
   for (const id of [...remote.keys()]) {
     if (!ids.has(id)) { ops.push((b) => b.delete(doc(col, id))); remote.delete(id); }
   }
   for (let i = 0; i < ops.length; i += 400) {
-    const batch = writeBatch(db);
-    ops.slice(i, i + 400).forEach((op) => op(batch));
-    try { await batch.commit(); }
-    catch (e) { say('Sincronizzazione non riuscita (' + (e.code || e.message) + ').'); return; }
+    const batch = writeBatch(db); ops.slice(i, i + 400).forEach((op) => op(batch));
+    try { await batch.commit(); } catch (e) { say('Sincronizzazione non riuscita (' + (e.code || e.message) + ').'); return; }
   }
   if (ops.length) say('');
 }
 
 function pushSettings(s) {
   if (!user) return;
-  setDoc(settingsRef(), { name: s.name || '', cats: s.cats, cols: s.cols })
+  setDoc(settingsRef(), { name: s.name || '', cats: s.cats, providers: s.providers, cols: s.cols })
     .catch((e) => say('Impostazioni non sincronizzate (' + (e.code || e.message) + ').'));
 }
 
@@ -1261,22 +1186,18 @@ function startListeners() {
   const isMerged = () => { try { return localStorage.getItem(mergedKey) === '1'; } catch (e) { return false; } };
 
   unsubItems = onSnapshot(itemsCol(), { includeMetadataChanges: true }, (snap) => {
-    const list = [];
-    remote = new Map();
+    const list = []; remote = new Map();
     snap.forEach((d) => { const it = d.data(); it.id = d.id; list.push(it); remote.set(d.id, stable(it)); });
     renderStatus((snap.metadata.fromCache || snap.metadata.hasPendingWrites) ? 'sincronizzazione…' : 'sincronizzato');
 
     if (!isMerged()) {
-      // primo accesso su questo dispositivo: unisco i dati locali a quelli del cloud
       if (snap.metadata.fromCache) return;
       const ids = new Set(list.map((x) => x.id));
       const union = list.concat(A.getItems().filter((x) => !ids.has(x.id)));
       try { localStorage.setItem(mergedKey, '1'); } catch (e) {}
-      A.setItemsFromCloud(union);
-      pushItems(union);
-      return;
+      A.setItemsFromCloud(union); pushItems(union); return;
     }
-    A.setItemsFromCloud(list);   // da qui in poi il cloud è la fonte di verità
+    A.setItemsFromCloud(list);
   }, (err) => say('Errore di sincronizzazione: ' + (err.code || err.message)));
 
   unsubSettings = onSnapshot(settingsRef(), { includeMetadataChanges: true }, (snap) => {
@@ -1287,9 +1208,7 @@ function startListeners() {
 
 async function signIn() {
   say('');
-  try {
-    await signInWithPopup(auth, provider);
-  } catch (e) {
+  try { await signInWithPopup(auth, provider); } catch (e) {
     if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') {
       try { await signInWithRedirect(auth, provider); } catch (e2) { say('Accesso non riuscito (' + (e2.code || e2.message) + ').'); }
     } else if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
@@ -1299,30 +1218,23 @@ async function signIn() {
 }
 
 async function doSignOut() {
-  say('');
-  stopListeners(); A.onItems = null; A.onSettings = null;
-  try { await signOut(auth); A.clearLocal(); }
-  catch (e) { say('Uscita non riuscita (' + (e.code || e.message) + ').'); }
+  say(''); stopListeners(); A.onItems = null; A.onSettings = null;
+  try { await signOut(auth); A.clearLocal(); } catch (e) { say('Uscita non riuscita (' + (e.code || e.message) + ').'); }
 }
 
-A.signIn = signIn;
-A.signOut = doSignOut;
-wBtn.addEventListener('click', signIn);
+A.signIn = signIn; A.signOut = doSignOut;
 
 onAuthStateChanged(auth, (u) => {
-  stopListeners();
-  user = u;
+  stopListeners(); user = u;
   if (u) {
     A.onItems = pushItems; A.onSettings = pushSettings;
     A.setAccount({ name: u.displayName, photo: u.photoURL, email: u.email });
-    inBtn.hidden = true; outBtn.hidden = false; wBtn.hidden = true;
-    renderStatus('sincronizzazione…');
-    startListeners();
+    inBtn.hidden = true; outBtn.hidden = false;
+    renderStatus('sincronizzazione…'); startListeners();
   } else {
     A.onItems = null; A.onSettings = null;
-    inBtn.hidden = false; outBtn.hidden = true; wBtn.hidden = false;
-    A.setAccount(null);
-    statusEl.textContent = IDLE_TEXT;
+    inBtn.hidden = false; outBtn.hidden = true;
+    A.setAccount(null); statusEl.textContent = IDLE_TEXT;
   }
 });
 }
