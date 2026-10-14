@@ -110,8 +110,18 @@ h2{font-family:var(--f-display);font-size:22px;font-weight:700;margin:0 0 16px}
 .tl-item { background: var(--tint); border: 1px solid var(--line); border-radius: 16px; padding: 12px; min-width: 95px; text-align: center; flex-shrink: 0; scroll-snap-align: start; }
 .tl-item.today { border-color: var(--accent); background: var(--accent); color: var(--on-accent); box-shadow: 0 4px 12px rgba(52, 81, 209, 0.3); }
 .tl-item.today .tl-lbl { color: rgba(255,255,255,0.8); }
+
+/* Highlight per la prossima scadenza */
+.tl-item.next { border-color: var(--rate); background: var(--bg); box-shadow: 0 4px 12px rgba(232, 88, 42, 0.15); }
+.tl-item.next .tl-lbl { color: var(--rate); }
+
 .tl-lbl { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
 .tl-val { font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
+
+/* Contatore giorni */
+.tl-days { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 6px; background: var(--line); padding: 2px 6px; border-radius: 6px; display: inline-block; }
+.tl-item.today .tl-days { background: rgba(0,0,0,0.2); color: #fff; }
+.tl-item.next .tl-days { background: rgba(232, 88, 42, 0.1); color: var(--rate); }
 
 /* LEDGER */
 .group+.group{margin-top:28px}
@@ -169,10 +179,9 @@ dialog {
   border-radius: 28px;
   padding: 0;
   width: calc(100% - 32px);
-  max-width: 460px;
+  max-width: 440px; /* Ridotto per maggiore compattezza */
   color: var(--ink);
   margin: auto;
-  /* Rispetta le safe-area (notch e barra inferiore) */
   max-height: calc(100dvh - env(safe-area-inset-top, 20px) - env(safe-area-inset-bottom, 20px) - 24px);
   overflow: visible;
   background: transparent;
@@ -204,7 +213,6 @@ dialog::backdrop {
   gap: 16px;
 }
 .dialog-footer {
-  /* Aggiunge padding extra in base alla barra home di iOS */
   padding: 16px 20px max(16px, env(safe-area-inset-bottom, 16px));
   border-top: 1px solid var(--line);
   background: var(--surface-glass);
@@ -215,33 +223,61 @@ dialog::backdrop {
 }
 
 .dialog-body h2 { margin: 0; font-size: 22px; }
-.seg { border: 0; margin: 0; padding: 4px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--line); border-radius: 14px; min-width: 0; }
-.seg label { position: relative; min-width: 0; }
+
+/* Controllo segmentato migliorato e ristretto */
+.seg { border: 0; margin: 0; padding: 4px; display: flex; width: 100%; background: var(--line); border-radius: 14px; box-sizing: border-box; }
+.seg label { flex: 1; min-width: 0; }
 .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .seg span { display: block; text-align: center; padding: 10px 2px; border-radius: 10px; font-weight: 600; font-size: 13px; color: var(--muted); transition: all 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .seg input:checked + span { background: var(--surface-glass); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
 
-/* min-width: 0 previene l'overflow flexbox su Safari */
-.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.field[hidden] { display: none; }
+/* Campi Moduli Blindati */
+.field { display: flex; flex-direction: column; gap: 6px; width: 100%; min-width: 0; box-sizing: border-box; }
+.field[hidden] { display: none !important; }
 .field label { font-size: 14px; font-weight: 600; color: var(--muted); }
-.field input, .field select { width: 100%; min-width: 0; border: 1px solid var(--line); background: var(--tint); border-radius: 12px; padding: 12px 14px; min-height: 48px; font-weight: 500; box-sizing: border-box; }
-.field input[type="color"] { padding: 2px; min-height: 44px; cursor: pointer; }
-.field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; background: var(--bg); }
 
-.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; min-width: 0; }
-.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; min-width: 0; }
+.field input, .field select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  background: var(--tint);
+  border-radius: 12px;
+  padding: 10px 14px;
+  height: 46px;
+  font-weight: 500;
+  font-size: 15px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; background: var(--bg); }
+.field input[type="color"] { padding: 2px; height: 44px; cursor: pointer; }
+
+/* Ripristino freccia tendina */
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2359647E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Layout Adattivi "Wrap" */
+.two { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; box-sizing: border-box; }
+.two > .field { flex: 1 1 125px; }
+
+.three { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; box-sizing: border-box; }
+.three > .field { flex: 1 1 70px; }
 
 .err { color: var(--danger); font-weight: 500; margin: 0; min-height: 1.4em; font-size: 14px; }
 .dialog-footer .btn { padding: 12px 24px; font-size: 16px; }
 
-/* Ridimensionamento mirato per schermi stretti (iPhone base/Pro) */
 @media (max-width: 400px) {
-  .dialog-body { padding: 20px 16px; gap: 12px; }
+  .dialog-body { padding: 20px 16px; gap: 14px; }
   .dialog-footer { padding: 16px 16px max(16px, env(safe-area-inset-bottom, 16px)); }
-  .field input, .field select { padding: 12px 10px; font-size: 15px; }
-  .two { gap: 8px; }
   .seg span { font-size: 12px; padding: 10px 0; }
+  .two { gap: 10px; }
 }
 
 .cat-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
@@ -494,7 +530,7 @@ dialog[open]#dlgWelcome.fullscreen { display: flex; align-items: center; justify
         <label>Le tue Categorie</label>
         <ul id="setCatList" class="cat-list"></ul>
         <div style="display:flex; gap:8px; margin-top:8px;">
-           <input type="text" id="newCatInput" placeholder="Nuova categoria..." style="flex:1;">
+           <input type="text" id="newCatInput" placeholder="Nuova categoria..." style="flex:1; border-radius:12px; border:1px solid var(--line); padding:10px 14px; background:var(--tint); color:var(--ink);">
            <button type="button" class="btn quiet" id="btnAddCat" style="padding: 10px 14px; font-size:14px;">Aggiungi</button>
         </div>
       </div>
@@ -503,7 +539,7 @@ dialog[open]#dlgWelcome.fullscreen { display: flex; align-items: center; justify
         <label>Servizi a rate</label>
         <ul id="setProvList" class="cat-list"></ul>
         <div style="display:flex; gap:8px; margin-top:8px;">
-           <input type="text" id="newProvInput" placeholder="Klarna, PayPal..." style="flex:1;">
+           <input type="text" id="newProvInput" placeholder="Klarna, PayPal..." style="flex:1; border-radius:12px; border:1px solid var(--line); padding:10px 14px; background:var(--tint); color:var(--ink);">
            <button type="button" class="btn quiet" id="btnAddProv" style="padding: 10px 14px; font-size:14px;">Aggiungi</button>
         </div>
       </div>
@@ -770,12 +806,26 @@ dialog[open]#dlgWelcome.fullscreen { display: flex; align-items: center; justify
     });
     
     var keys = Object.keys(tl).sort(function(a,b){ return a-b; });
+    var nextFound = false;
+    
     var html = keys.map(function(k){
        var node = tl[k];
        var dName = node.date.getDate() + ' ' + mLabel(node.date.getFullYear()*12+node.date.getMonth(), {month:'short'});
        var isToday = node.date.getTime() === today.getTime();
-       var cls = isToday ? 'tl-item today' : 'tl-item';
-       return '<div class="'+cls+'"><div class="tl-lbl">'+(isToday?'Oggi':dName)+'</div><div class="tl-val">'+fmt(node.amt)+'</div></div>';
+       
+       var diffTime = Math.abs(node.date.getTime() - today.getTime());
+       var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+       var daysLabel = isToday ? 'Oggi' : '-' + diffDays + ' giorni';
+       
+       var cls = 'tl-item';
+       if(isToday) {
+           cls += ' today';
+       } else if(!nextFound) {
+           cls += ' next';
+           nextFound = true;
+       }
+       
+       return '<div class="'+cls+'"><div class="tl-lbl">'+(isToday?'Oggi':dName)+'</div><div class="tl-val">'+fmt(node.amt)+'</div><div class="tl-days">'+daysLabel+'</div></div>';
     }).join('');
     
     $('timelineTrack').innerHTML = html || '<div class="empty" style="padding:10px 0;">Nessuna uscita prevista nei prossimi 30 giorni.</div>';
